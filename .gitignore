@@ -1,0 +1,83 @@
+
+# === START Unity ===
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+.utmp/
+*.log
+sysinfo.txt
+mono_crash.*
+*.blend1
+*.blend1.meta
+*.apk
+*.aab
+*.app
+*.unitypackage
+crashlytics-build.properties
+# === END Unity ===
+
+# === START IDE ===
+# Visual Studio & Rider
+.vs/
+*.sln
+*.csproj
+ExportedObj/
+*.tmp
+*.user
+*.userprefs
+*.suo
+*.pidb
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+.gradle/
+.idea/
+*.DotSettings.user
+# Visual Studio Code
+.vscode/
+# === END IDE ===
+
+# === START OS ===
+.DS_Store
+Thumbs.db
+# === END OS ===
+
+# === START Addressables ===
+/ServerData
+/[Aa]ssets/StreamingAssets/aa*
+/[Aa]ssets/AddressableAssetsData/link.xml*
+/[Aa]ssets/Addressables_Temp*
+/[Aa]ssets/AddressableAssetsData/*/*.bin*
+# === END Addressables ===
+
+# === START VisualScripting ===
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+# === END VisualScripting ===
+
+# === START Testing ===
+/InitTestScene*.unity*
+/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+# === END Testing ===
+
+# === START Custom ===
+# Add your own rules here...
+# Examples:
+# *.psd
+# /MyBuilds/
+# === END Custom ===
+
+/Assets/Easy gitignore & LFS Setup/
