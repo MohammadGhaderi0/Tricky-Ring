@@ -1,0 +1,32 @@
+/* The main container that fills the screen */
+.root-container {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+
+    /* Layout: Vertical column */
+    flex-direction: column;
+
+    /* Aligns children (the label) to the horizontal center */
+    align-items: center;
+
+    /* Aligns children to the top */
+    justify-content: flex-start;
+
+    /* Reduced padding to move it higher up */
+    padding-top: 50px;
+}
+
+/* The style for the score number */
+.score-label {
+    /* Reduced from 150px to 80px */
+    font-size: 80px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+
+    /* Ensure the text is centered within its own bounds */
+    -unity-text-align: upper-center;
+
+    /* Optional: Slight shadow for readability against game bg */
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}

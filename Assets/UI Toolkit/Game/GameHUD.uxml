@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <!-- Link the stylesheet -->
+    <Style src="GameStyle.uss" />
+    
+    <!-- Main Container -->
+    <ui:VisualElement name="Root" class="root-container">
+        <!-- The Score Number -->
+        <ui:Label text="0" name="ScoreLabel" class="score-label" />
+    </ui:VisualElement>
+</ui:UXML>

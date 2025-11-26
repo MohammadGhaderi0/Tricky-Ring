@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements; // Required for UI Toolkit
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class GameManager : MonoBehaviour
     
     [Tooltip("Drag the single Point object from your scene here")]
     public Transform singlePointObject; 
+
+    [Header("UI References")]
+    [Tooltip("Assign the GameObject with the UI Document component here")]
+    public UIDocument uiDocument; 
+    private Label _scoreLabel;
 
     [Header("Game Data")]
     public int Score = 0;
@@ -25,6 +31,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Initialize UI
+        if (uiDocument != null)
+        {
+            var root = uiDocument.rootVisualElement;
+            // "ScoreLabel" must match the name in your UXML file
+            _scoreLabel = root.Q<Label>("ScoreLabel");
+        }
+
         obstacleManager.Setup(player);
         StartGame();
     }
@@ -35,6 +49,8 @@ public class GameManager : MonoBehaviour
         Streak = 1;
         _itemsCollected = 0;
         
+        UpdateScoreUI();
+        
         obstacleManager.ActivateNextObstacle();
         SpawnPoint();
     }
@@ -44,11 +60,11 @@ public class GameManager : MonoBehaviour
         Score += Streak;
         if (Streak < 4) Streak++;
 
+        UpdateScoreUI(); // Update the UI Label
+
         player.IncreaseSpeed(0.05f);
         _itemsCollected++;
 
-        // Every 2 points -> New Obstacle
-        // Every 1 point (if not new obstacle) -> Flip Obstacle
         if (_itemsCollected % 2 == 0)
         {
             obstacleManager.ActivateNextObstacle();
@@ -58,9 +74,16 @@ public class GameManager : MonoBehaviour
             obstacleManager.FlipRandomObstacle();
         }
 
-        // Instead of destroying, we just move it
         singlePointObject.gameObject.SetActive(false); 
         SpawnPoint();
+    }
+
+    private void UpdateScoreUI()
+    {
+        if (_scoreLabel != null)
+        {
+            _scoreLabel.text = Score.ToString();
+        }
     }
 
     private void SpawnPoint()
@@ -88,12 +111,11 @@ public class GameManager : MonoBehaviour
             attempts++;
         }
 
-        // Reposition the existing point
         float r = side ? player.innerRadius : player.outerRadius;
         float rad = angle * Mathf.Deg2Rad;
         
         singlePointObject.position = new Vector3(Mathf.Cos(rad) * r, Mathf.Sin(rad) * r, 0);
-        singlePointObject.rotation = Quaternion.Euler(0, 0, angle); // Optional: Rotate sprite to face center
+        singlePointObject.rotation = Quaternion.Euler(0, 0, angle); 
         singlePointObject.gameObject.SetActive(true);
 
         _pointSpawnRotationSnapshot = player.TotalRotation;
@@ -106,7 +128,7 @@ public class GameManager : MonoBehaviour
             if (Streak > 1)
             {
                 Streak = 1;
-                Debug.Log("Streak Lost!");
+                // Optional: Update UI color or effect here to show streak reset
             }
         }
     }
@@ -114,5 +136,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         player.Die();
+        // Add Game Over UI logic here
     }
 }
