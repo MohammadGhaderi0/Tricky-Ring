@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
             var root = uiDocument.rootVisualElement;
             // "ScoreLabel" must match the name in your UXML file
             _scoreLabel = root.Q<Label>("ScoreLabel");
+            
+            if (_scoreLabel == null) Debug.LogError("Could not find Label named 'ScoreLabel' in UXML!");
+        }
+        else
+        {
+            Debug.LogError("UIDocument is not assigned in GameManager Inspector!");
         }
 
         obstacleManager.Setup(player);
@@ -83,6 +89,10 @@ public class GameManager : MonoBehaviour
         if (_scoreLabel != null)
         {
             _scoreLabel.text = Score.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("ScoreLabel is NULL. UI not updating.");
         }
     }
 

@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Game Over");
     }
 
+    // ADDED: Centralized Collision Detection
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check for Obstacle Tag
@@ -80,6 +81,20 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Die();
+            }
+        }
+        else if (other.CompareTag("Point"))
+        {
+            // Debug Log to confirm collision logic works
+            Debug.Log("Player hit Point! notifying GameManager...");
+            
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPointCollected();
+            }
+            else 
+            {
+                Debug.LogError("GameManager Instance is NULL!");
             }
         }
     }

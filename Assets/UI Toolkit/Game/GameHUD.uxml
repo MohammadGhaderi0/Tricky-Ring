@@ -1,10 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <!-- Link the stylesheet -->
-    <Style src="GameStyle.uss" />
-    
-    <!-- Main Container -->
+    <Style src="project://database/Assets/UI%20Toolkit/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=93b361784326ecc4ab8a59bbef0771a0&amp;type=3#GameStyle" />
     <ui:VisualElement name="Root" class="root-container">
-        <!-- The Score Number -->
         <ui:Label text="0" name="ScoreLabel" class="score-label" />
     </ui:VisualElement>
 </ui:UXML>
