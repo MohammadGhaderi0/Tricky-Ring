@@ -1,21 +1,29 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    public float baseRotationSpeed = 100f; // Degrees per second
+    public float baseRotationSpeed = 100f; 
     public float innerRadius = 2.5f;
     public float outerRadius = 4.5f;
-    public float switchSpeed = 10f; // Lerp speed
+    public float switchSpeed = 10f; 
 
     [Header("State (Read Only)")]
-    public float CurrentAngle; // 0 to 360
-    public float TotalRotation; // Accumulates forever (for streak calculation)
+    public float CurrentAngle; 
+    public float TotalRotation; 
     public bool IsInner = false;
 
     private float _currentRadius;
     private float _speedMultiplier = 1.0f;
     private bool _isDead = false;
+    private Rigidbody2D _rb;
+
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -26,14 +34,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (_isDead) return;
-
         HandleInput();
+    }
+
+    void FixedUpdate()
+    {
+        if (_isDead) return;
         MovePlayer();
     }
 
     private void HandleInput()
     {
-        // Touch or Click
         if (Input.GetMouseButtonDown(0))
         {
             IsInner = !IsInner;
@@ -43,18 +54,21 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         // 1. Increment Angle
-        float step = baseRotationSpeed * _speedMultiplier * Time.deltaTime;
+        float step = baseRotationSpeed * _speedMultiplier * Time.fixedDeltaTime;
         CurrentAngle = (CurrentAngle + step) % 360f;
         TotalRotation += step;
 
         // 2. Lerp Radius
         float targetR = IsInner ? innerRadius : outerRadius;
-        _currentRadius = Mathf.Lerp(_currentRadius, targetR, Time.deltaTime * switchSpeed);
+        // fixedDeltaTime here as well
+        _currentRadius = Mathf.Lerp(_currentRadius, targetR, Time.fixedDeltaTime * switchSpeed);
 
         // 3. Apply Position (Polar to Cartesian)
         float rad = CurrentAngle * Mathf.Deg2Rad;
         Vector3 newPos = new Vector3(Mathf.Cos(rad) * _currentRadius, Mathf.Sin(rad) * _currentRadius, 0);
-        transform.position = newPos;
+        
+        // Using MovePosition instead of transform.position
+        _rb.MovePosition(newPos);
     }
 
     public void IncreaseSpeed(float amount)
@@ -68,34 +82,15 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Game Over");
     }
 
-    // ADDED: Centralized Collision Detection
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check for Obstacle Tag
         if (other.CompareTag("Obstacle"))
         {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.GameOver();
-            }
-            else
-            {
-                Die();
-            }
+            GameManager.Instance.GameOver();
         }
         else if (other.CompareTag("Point"))
         {
-            // Debug Log to confirm collision logic works
-            Debug.Log("Player hit Point! notifying GameManager...");
-            
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.OnPointCollected();
-            }
-            else 
-            {
-                Debug.LogError("GameManager Instance is NULL!");
-            }
+            GameManager.Instance.OnPointCollected();
         }
     }
 }
