@@ -31,10 +31,28 @@
     border-radius: 20px;
 }
 
+/* NEW: Interaction for Settings */
+.settings-btn:active {
+    opacity: 0.6;
+    scale: 0.9;
+}
+
 /* Profile */
 .profile-container {
     flex-direction: row;
     align-items: center;
+
+    /* NEW: Strip default button styling */
+    background-color: rgba(0,0,0,0);
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* NEW: Interaction for Profile */
+.profile-container:active {
+    opacity: 0.6;
+    scale: 0.95;
 }
 
 .profile-name {

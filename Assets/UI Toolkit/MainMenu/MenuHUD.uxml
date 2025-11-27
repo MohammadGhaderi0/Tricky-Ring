@@ -3,10 +3,10 @@
     <ui:VisualElement name="Root" class="root-menu">
         <ui:VisualElement name="TopBar" class="top-bar">
             <ui:Button name="SettingsBtn" class="icon-btn settings-btn" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/gear.png?fileID=2800000&amp;guid=8811ae8cd0358924ab4139b0fb74deee&amp;type=3#gear&quot;); top: -17px; left: -30px; position: absolute; width: 150px; height: 150px;" />
-            <ui:VisualElement name="ProfileContainer" class="profile-container" style="position: absolute; top: -9px; left: auto; right: 11px;">
+            <ui:Button name="ProfileContainer" class="profile-container" style="position: absolute; top: -9px; left: auto; right: 11px;">
                 <ui:Label text="Player" name="PlayerName" class="profile-name" style="font-size: 50px;" />
-                <ui:VisualElement name="ProfilePic" class="profile-pic" style="width: 130px; height: 130px;" />
-            </ui:VisualElement>
+                <ui:VisualElement name="ProfilePic" class="profile-pic" style="width: 130px; height: 130px; background-image: url(&quot;project://database/Assets/Unknown.png?fileID=2800000&amp;guid=5d315731709063846b0d314d9479e6bf&amp;type=3#Unknown&quot;);" />
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement name="VisualElement" class="center-area">
             <ui:Label text="TRICKY&#10;RING" class="game-title" style="font-size: 203px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;); top: -200px;" />
@@ -31,33 +31,21 @@
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
-
-    <!-- NEW: Settings Overlay -->
     <ui:VisualElement name="SettingsOverlay" class="settings-overlay" style="display: none;">
-        <!-- The Window -->
         <ui:VisualElement name="SettingsWindow" class="settings-window">
             <ui:Label text="SETTINGS" class="settings-title" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
-            
             <ui:VisualElement class="settings-row">
-                <!-- Vibrate -->
                 <ui:Button name="VibBtn" class="setting-sq-btn">
-                    <!-- Assign your Vibrate Icon here in UI Builder -->
                     <ui:VisualElement class="setting-icon icon-vibrate" />
                 </ui:Button>
-                <!-- Sound -->
                 <ui:Button name="SoundBtn" class="setting-sq-btn">
-                    <!-- Assign your Sound Icon here in UI Builder -->
                     <ui:VisualElement class="setting-icon icon-sound" />
                 </ui:Button>
-                <!-- Help -->
                 <ui:Button name="HelpBtn" class="setting-sq-btn">
-                    <!-- Assign your Question Mark Icon here in UI Builder -->
                     <ui:VisualElement class="setting-icon icon-help" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
-
-        <!-- Close X Button -->
         <ui:Button name="CloseSettingsBtn" class="close-btn-circle">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
