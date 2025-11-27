@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MenuStyle.uss?fileID=7433441132597879392&amp;guid=93d2e4a2e228b794697388ec220eac84&amp;type=3#MenuStyle" />
+    <ui:VisualElement name="Root" class="root-menu">
+        <ui:VisualElement name="TopBar" class="top-bar">
+            <ui:Button name="SettingsBtn" class="icon-btn settings-btn" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/gear.png?fileID=2800000&amp;guid=8811ae8cd0358924ab4139b0fb74deee&amp;type=3#gear&quot;); top: -17px; left: -30px; position: absolute; width: 150px; height: 150px;" />
+            <ui:VisualElement name="ProfileContainer" class="profile-container" style="position: absolute; top: -9px; left: auto; right: 11px;">
+                <ui:Label text="Player" name="PlayerName" class="profile-name" style="font-size: 50px;" />
+                <ui:VisualElement name="ProfilePic" class="profile-pic" style="width: 130px; height: 130px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="VisualElement" class="center-area">
+            <ui:Label text="TRICKY&#10;RING" class="game-title" style="font-size: 203px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;); top: -200px;" />
+            <ui:Label text="TAP TO START" class="tap-text" style="font-size: 76px; top: -166px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Light.otf?fileID=12800000&amp;guid=e98d785f14c89bb448623c4e71234156&amp;type=3#Metropolis-Light&quot;);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomBar" class="bottom-bar">
+            <ui:Button name="ShopBtn" class="bottom-nav-btn">
+                <ui:VisualElement name="Icon" class="nav-icon shop-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/shoppingCart.png?fileID=2800000&amp;guid=1c4d1138ae42c7d4d8e684965654588e&amp;type=3#shoppingCart&quot;); -unity-background-scale-mode: scale-and-crop; background-size: contain;" />
+                <ui:Label text="Shop" name="Label" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Bold.otf?fileID=12800000&amp;guid=0923d6c9d888b1946ba6db5fd1c557de&amp;type=3#Metropolis-Bold&quot;); background-size: 100px 100%;" />
+            </ui:Button>
+            <ui:Button name="LeaderboardBtn" class="bottom-nav-btn">
+                <ui:VisualElement name="Icon" class="nav-icon rank-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/leaderboardsComplex.png?fileID=2800000&amp;guid=367fe106d1830094492148a402e52eaf&amp;type=3#leaderboardsComplex&quot;);" />
+                <ui:Label text="Rankings" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Bold.otf?fileID=12800000&amp;guid=0923d6c9d888b1946ba6db5fd1c557de&amp;type=3#Metropolis-Bold&quot;);" />
+            </ui:Button>
+            <ui:Button name="NoAdsBtn" class="bottom-nav-btn">
+                <ui:VisualElement name="Icon" class="nav-icon noads-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/movie.png?fileID=2800000&amp;guid=f7edd997915cdfd4a85835be1c9fd0a2&amp;type=3#movie&quot;);" />
+                <ui:Label text="No Ads" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Bold.otf?fileID=12800000&amp;guid=0923d6c9d888b1946ba6db5fd1c557de&amp;type=3#Metropolis-Bold&quot;);" />
+            </ui:Button>
+            <ui:Button name="HeartBtn" class="bottom-nav-btn">
+                <ui:VisualElement name="Icon" class="nav-icon heart-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/joystickUp.png?fileID=2800000&amp;guid=fc9183a7f1fca534ebf77d4c129deb04&amp;type=3#joystickUp&quot;);" />
+                <ui:Label text="Buy Lives" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Bold.otf?fileID=12800000&amp;guid=0923d6c9d888b1946ba6db5fd1c557de&amp;type=3#Metropolis-Bold&quot;);" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

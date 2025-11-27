@@ -1,0 +1,126 @@
+/* --- Global Reset --- */
+.root-menu {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 40px 40px;
+    background-color: rgba(0, 0, 0, 0); /* Transparent */
+}
+
+/* --- Top Bar --- */
+.top-bar {
+    flex-direction: row;
+    width: 100%;
+    height: 150px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Settings Icon */
+.icon-btn {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0,0,0,0); /* Transparent bg */
+    border-width: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+/* Settings Button specific */
+.settings-btn {
+    border-radius: 20px;
+}
+
+/* Profile */
+.profile-container {
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-name {
+    font-size: 40px;
+    color: white;
+    margin-right: 20px;
+    -unity-font-style: bold;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: white;
+    border-width: 3px;
+    border-color: white;
+}
+
+/* --- Center Area (Title) --- */
+.center-area {
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 200px; /* Push it up a bit visually */
+}
+
+.game-title {
+    font-size: 140px; /* Huge Text */
+    color: white;
+    -unity-text-align: middle-center;
+    margin-bottom: 40px;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+    -unity-font-style: normal; /* Keep it clean/thin */
+}
+
+.tap-text {
+    font-size: 50px;
+    color: white;
+    -unity-text-align: middle-center;
+    opacity: 0.9;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+/* --- Bottom Bar --- */
+.bottom-bar {
+    flex-direction: row;
+    width: 100%;
+    /* CHANGED: Increased height to 350px to fit 160px icons comfortably */
+    height: 350px;
+    justify-content: space-around;
+    align-items: center; /* Center content vertically */
+    padding-bottom: 10px;
+}
+
+.bottom-nav-btn {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centers the icon+text group vertically */
+    background-color: rgba(0,0,0,0);
+    border-width: 0;
+    width: 22%;
+    height: 100%;
+}
+
+.bottom-nav-btn:active {
+    opacity: 0.6;
+    scale: 0.95;
+}
+
+/* ICONS */
+.nav-icon {
+    /* CHANGED: Increased to 160px */
+    width: 160px;
+    height: 160px;
+    margin-bottom: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+    border-radius: 10px;
+    /* CHANGED: Prevents icon from getting squished if width is tight */
+    flex-shrink: 0;
+}
+
+/* Text Labels */
+.nav-text {
+    font-size: 30px;
+    color: white;
+    -unity-text-align: upper-center;
+    white-space: nowrap;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+}
