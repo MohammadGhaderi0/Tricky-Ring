@@ -124,3 +124,113 @@
     white-space: nowrap;
     text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
 }
+
+/* ===========================
+   SETTINGS OVERLAY STYLES 
+   =========================== */
+
+/* The Fullscreen Dark Overlay */
+.settings-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* Very dark, mostly opaque background */
+    background-color: rgba(12, 12, 18, 0.95);
+
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Main Window Box */
+.settings-window {
+    width: 80%;
+    max-width: 650px;
+    height: 500px;
+
+    /* Dark Blue Theme */
+    background-color: rgb(43, 43, 61);
+    border-radius: 50px;
+
+    /* White Stroke */
+    border-width: 4px;
+    border-color: white;
+
+    /* Layout: Center items vertically and horizontally */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* "SETTINGS" Title */
+.settings-title {
+    font-size: 60px;
+    color: white;
+    margin-bottom: 60px; /* Space between title and icons */
+    -unity-text-align: middle-center;
+}
+
+/* Container for the 3 buttons */
+.settings-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* The Square Buttons */
+.setting-sq-btn {
+    width: 130px;
+    height: 130px;
+    margin: 0 25px; /* Spacing between buttons */
+    background-color: transparent;
+
+    border-width: 3px;
+    border-color: white;
+    border-radius: 30px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.setting-sq-btn:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    scale: 0.95;
+}
+
+/* Icons inside the square buttons */
+.setting-icon {
+    width: 70px;
+    height: 70px;
+    -unity-background-scale-mode: scale-to-fit;
+    /* Tint white in case sprite is black */
+    -unity-background-image-tint-color: white;
+}
+
+/* The Close (X) Circle Button */
+.close-btn-circle {
+    width: 110px;
+    height: 110px;
+    margin-top: 60px; /* Distance from window */
+
+    background-color: transparent;
+    border-width: 4px;
+    border-color: white;
+    border-radius: 60px; /* Circle */
+
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn-circle:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    scale: 0.9;
+}
+
+.close-text {
+    font-size: 60px;
+    color: white;
+    -unity-text-align: middle-center;
+    padding-bottom: 5px; /* Visual centering tweak */
+}
