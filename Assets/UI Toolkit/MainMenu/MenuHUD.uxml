@@ -31,20 +31,18 @@
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
-
-    <!-- SETTINGS OVERLAY -->
     <ui:VisualElement name="SettingsOverlay" class="settings-overlay" style="display: none;">
         <ui:VisualElement name="SettingsWindow" class="settings-window">
             <ui:Label text="SETTINGS" class="settings-title" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
             <ui:VisualElement class="settings-row">
                 <ui:Button name="VibBtn" class="setting-sq-btn">
-                    <ui:VisualElement class="setting-icon icon-vibrate" />
+                    <ui:VisualElement class="setting-icon icon-vibrate" style="width: 100px; height: 100px;" />
                 </ui:Button>
                 <ui:Button name="SoundBtn" class="setting-sq-btn">
-                    <ui:VisualElement class="setting-icon icon-sound" />
+                    <ui:VisualElement class="setting-icon icon-sound" style="width: 100px; height: 100px;" />
                 </ui:Button>
                 <ui:Button name="HelpBtn" class="setting-sq-btn">
-                    <ui:VisualElement class="setting-icon icon-help" />
+                    <ui:VisualElement class="setting-icon icon-help" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/question.png?fileID=2800000&amp;guid=6790c15efb4d35f47a52952573d92ec5&amp;type=3#question&quot;); height: 100px; width: 100px;" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
@@ -52,34 +50,23 @@
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
-
-    <!-- NEW: LEADERBOARD OVERLAY -->
     <ui:VisualElement name="LeaderboardOverlay" class="settings-overlay" style="display: none;">
         <ui:VisualElement name="LeaderboardWindow" class="leaderboard-window">
             <ui:Label text="RANKINGS" class="settings-title" style="margin-bottom: 20px; font-size: 50px;" />
-            
-            <!-- Tabs -->
             <ui:VisualElement class="tabs-container">
                 <ui:Button name="TabDaily" text="Daily" class="tab-btn tab-active" />
                 <ui:Button name="TabWeekly" text="Weekly" class="tab-btn" />
                 <ui:Button name="TabAllTime" text="All Time" class="tab-btn" />
             </ui:VisualElement>
-
-            <!-- List Header -->
             <ui:VisualElement class="list-header">
                 <ui:Label text="#" class="header-text" style="width: 15%;" />
                 <ui:Label text="PLAYER" class="header-text" style="width: 55%; -unity-text-align: middle-left;" />
                 <ui:Label text="SCORE" class="header-text" style="width: 30%; -unity-text-align: middle-right;" />
             </ui:VisualElement>
-
-            <!-- The Virtualized List View -->
-            <ui:ListView name="LeaderboardList" class="leaderboard-list" item-height="80" fixed-item-height="80" />
-
+            <ui:ListView name="LeaderboardList" item-height="80" fixed-item-height="80" class="leaderboard-list" />
         </ui:VisualElement>
-        
         <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
-
 </ui:UXML>

@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: ed2077e33ae1cb5449c3b29024ddd712
+guid: 7feabb549d79120418d5b29ce9262461
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7469341900316054855
-    second: audioOff_0
+      213: 1056385884885405113
+    second: Vibration on_0
+  - first:
+      213: 3741691297437628599
+    second: Vibration on_1
+  - first:
+      213: 81304429926146746
+    second: Vibration on_2
+  - first:
+      213: 3168257891383909671
+    second: Vibration on_3
+  - first:
+      213: -3722980514625493829
+    second: Vibration on_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: audioOff_0
+      name: Vibration on_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 14
-        width: 42
-        height: 67
+        x: 16
+        y: 71
+        width: 76
+        height: 411
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9ba68bdad11975890800000000000000
-      internalID: -7469341900316054855
+      spriteID: 9bdc4568d5909ae00800000000000000
+      internalID: 1056385884885405113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vibration on_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 120
+        width: 68
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b8b0f229682de330800000000000000
+      internalID: 3741691297437628599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vibration on_2
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 28
+        width: 247
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab2e960c2f9d02100800000000000000
+      internalID: 81304429926146746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vibration on_3
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 120
+        width: 68
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72d14cc14c9e7fb20800000000000000
+      internalID: 3168257891383909671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vibration on_4
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 71
+        width: 77
+        height: 411
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb4eb0872f0555cc0800000000000000
+      internalID: -3722980514625493829
       vertices: []
       indices: 
       edges: []
@@ -148,7 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      audioOff_0: -7469341900316054855
+      Vibration on_0: 1056385884885405113
+      Vibration on_1: 3741691297437628599
+      Vibration on_2: 81304429926146746
+      Vibration on_3: 3168257891383909671
+      Vibration on_4: -3722980514625493829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

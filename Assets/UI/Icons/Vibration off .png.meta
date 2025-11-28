@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ed2077e33ae1cb5449c3b29024ddd712
+guid: 40c3291336c122346ba48be45d372852
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7469341900316054855
-    second: audioOff_0
+      213: 5191967007928643310
+    second: Vibration off _0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: audioOff_0
+      name: Vibration off _0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 14
-        width: 42
-        height: 67
+        x: 124
+        y: 28
+        width: 266
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9ba68bdad11975890800000000000000
-      internalID: -7469341900316054855
+      spriteID: eee62294c729d0840800000000000000
+      internalID: 5191967007928643310
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      audioOff_0: -7469341900316054855
+      Vibration off _0: 5191967007928643310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
