@@ -1,34 +1,46 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements; // Required for UI Toolkit
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("References")] public PlayerController player;
+    [Header("References")] 
+    public PlayerController player;
     public ObstacleManager obstacleManager;
+    public CameraController cameraController; // New Reference
 
     [Tooltip("Drag the single Point object from your scene here")]
     public Transform singlePointObject;
 
-    [Header("UI References")] [Tooltip("Assign the GameObject with the UI Document component here")]
+    [Header("UI References")] 
     public UIDocument uiDocument;
 
+    // UI Elements
+    private VisualElement _root;
     private Label _scoreLabel;
+    private VisualElement _gameOverPanel;
+    private Label _bestScoreLabel;
+    private Button _pauseBtn; // To hide it on game over
+    
+    // Buttons
+    private Button _replayBtn;
+    private Button _homeBtn;
 
-    [Header("Game Data")] public int Score = 0;
+    [Header("Game Data")] 
+    public int Score = 0;
     public int Streak = 1;
 
     private float _pointSpawnRotationSnapshot;
     private int _itemsCollected = 0;
-    [SerializeField] private Camera _gameCamera;
-    private Vector3 _cameraOffset = new Vector3(0, -20, 0);
-    
+
     [Header("Animation Settings")]
-    public float uiMoveDistanceY = -1000f;
-    public float cameraDuration = 1.5f; // Camera takes 1.5s
-    public float uiDuration = 0.5f;     // UI takes 0.5s (Faster!)
+    public float uiDuration = 0.8f;     
+    // How far DOWN the score label should move (pixels)
+    public float scoreLabelMoveY = 400f; 
+
     void Awake()
     {
         Instance = this;
@@ -36,18 +48,22 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Initialize UI
         if (uiDocument != null)
         {
-            var root = uiDocument.rootVisualElement;
-            // "ScoreLabel" must match the name in your UXML file
-            _scoreLabel = root.Q<Label>("ScoreLabel");
+            _root = uiDocument.rootVisualElement;
+            _scoreLabel = _root.Q<Label>("ScoreLabel");
+            _gameOverPanel = _root.Q<VisualElement>("GameOverPanel");
+            _bestScoreLabel = _root.Q<Label>("BestScoreVal");
+            _pauseBtn = _root.Q<Button>("PauseBtn");
+            
+            _replayBtn = _root.Q<Button>("ReplayBtn");
+            _homeBtn = _root.Q<Button>("HomeBtn");
 
-            if (_scoreLabel == null) Debug.LogError("Could not find Label named 'ScoreLabel' in UXML!");
-        }
-        else
-        {
-            Debug.LogError("UIDocument is not assigned in GameManager Inspector!");
+            if (_replayBtn != null) _replayBtn.clicked += RestartGame;
+            if (_homeBtn != null) _homeBtn.clicked += GoHome;
+
+            // Ensure Game Over panel is hidden/reset at start
+            if (_gameOverPanel != null) _gameOverPanel.style.bottom = Length.Percent(-100); 
         }
 
         obstacleManager.Setup(player);
@@ -59,8 +75,9 @@ public class GameManager : MonoBehaviour
         Score = 0;
         Streak = 1;
         _itemsCollected = 0;
-
         UpdateScoreUI();
+        
+        if (_pauseBtn != null) _pauseBtn.style.display = DisplayStyle.Flex;
 
         obstacleManager.ActivateNextObstacle();
         SpawnPoint();
@@ -71,19 +88,12 @@ public class GameManager : MonoBehaviour
         Score += Streak;
         if (Streak < 4) Streak++;
 
-        UpdateScoreUI(); // Update the UI Label
-
+        UpdateScoreUI();
         player.IncreaseSpeed(0.05f);
         _itemsCollected++;
 
-        if (_itemsCollected % 2 == 0)
-        {
-            obstacleManager.ActivateNextObstacle();
-        }
-        else
-        {
-            obstacleManager.FlipRandomObstacle();
-        }
+        if (_itemsCollected % 2 == 0) obstacleManager.ActivateNextObstacle();
+        else obstacleManager.FlipRandomObstacle();
 
         singlePointObject.gameObject.SetActive(false);
         SpawnPoint();
@@ -91,18 +101,12 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        if (_scoreLabel != null)
-        {
-            _scoreLabel.text = Score.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("ScoreLabel is NULL. UI not updating.");
-        }
+        if (_scoreLabel != null) _scoreLabel.text = Score.ToString();
     }
 
     private void SpawnPoint()
     {
+        // (Logic unchanged)
         bool valid = false;
         int attempts = 0;
         float angle = 0;
@@ -112,18 +116,8 @@ public class GameManager : MonoBehaviour
         {
             angle = Random.Range(0f, 360f);
             side = Random.value > 0.5f;
-
-            if (Mathf.Abs(Mathf.DeltaAngle(player.CurrentAngle, angle)) < 45f)
-            {
-                attempts++;
-                continue;
-            }
-
-            if (!obstacleManager.IsPositionOccupied(angle, side))
-            {
-                valid = true;
-            }
-
+            if (Mathf.Abs(Mathf.DeltaAngle(player.CurrentAngle, angle)) < 45f) { attempts++; continue; }
+            if (!obstacleManager.IsPositionOccupied(angle, side)) valid = true;
             attempts++;
         }
 
@@ -141,55 +135,82 @@ public class GameManager : MonoBehaviour
     {
         if (player.TotalRotation - _pointSpawnRotationSnapshot > 360f)
         {
-            if (Streak > 1)
-            {
-                Streak = 1;
-                // Optional: Update UI color or effect here to show streak reset
-            }
+            if (Streak > 1) Streak = 1;
         }
     }
 
     public void GameOver()
     {
         player.Die();
-        StartCoroutine(MoveDownTheCamera());
+        
+        // Hide Pause Button
+        if (_pauseBtn != null) _pauseBtn.style.display = DisplayStyle.None;
+
+        // Save Best Score
+        int currentBest = PlayerPrefs.GetInt("HighScore", 0);
+        if (Score > currentBest)
+        {
+            currentBest = Score;
+            PlayerPrefs.SetInt("HighScore", currentBest);
+        }
+        if (_bestScoreLabel != null) _bestScoreLabel.text = currentBest.ToString();
+
+        // Trigger Animations
+        if (cameraController != null) cameraController.MoveDown();
+        StartCoroutine(AnimateGameOverUI());
     }
 
-    private IEnumerator MoveDownTheCamera()
+    private IEnumerator AnimateGameOverUI()
     {
-        yield return new WaitForSeconds(1);
-
-        Vector3 startCamPos = _gameCamera.transform.position;
-        Vector3 targetCamPos = startCamPos + _cameraOffset;
-        
-        float startUiY = 0f;
-        float targetUiY = uiMoveDistanceY; 
+        yield return new WaitForSeconds(1f); // Wait for camera to start/finish logic
 
         float elapsedTime = 0f;
+        
+        // Setup Start/End values
+        // Score moves from Y=0 to Y=scoreLabelMoveY
+        float startScoreY = 0f;
+        float targetScoreY = scoreLabelMoveY;
 
-        while (elapsedTime < cameraDuration)
+        // Game Over Panel moves from -100% to 0% (using Length)
+        Length startPanelBottom = Length.Percent(-100);
+        Length targetPanelBottom = Length.Percent(0);
+
+        while (elapsedTime < uiDuration)
         {
-            // 1. Calculate Camera Progress (0 to 1)
-            float t_Cam = elapsedTime / cameraDuration;
-            t_Cam = t_Cam * t_Cam * (3f - 2f * t_Cam); // Smooth step
+            float t = elapsedTime / uiDuration;
+            t = t * t * (3f - 2f * t); // Smooth step
 
-            _gameCamera.transform.position = Vector3.Lerp(startCamPos, targetCamPos, t_Cam);
-
-            // 2. Calculate UI Progress independently
-            float t_UI = Mathf.Clamp01(elapsedTime / uiDuration); 
-            t_UI = t_UI * t_UI * (3f - 2f * t_UI); // Smooth step
-
+            // 1. Move Score Label DOWN
             if (_scoreLabel != null)
             {
-                float currentUiY = Mathf.Lerp(startUiY, targetUiY, t_UI);
-                _scoreLabel.style.translate = new Translate(
-                    new Length(0, LengthUnit.Pixel), 
-                    new Length(currentUiY, LengthUnit.Pixel), 
-                    0);
+                float currentY = Mathf.Lerp(startScoreY, targetScoreY, t);
+                _scoreLabel.style.translate = new Translate(0, currentY, 0);
             }
-            
+
+            // 2. Move Game Over Panel UP
+            if (_gameOverPanel != null)
+            {
+                // We manually interpolate the percent value
+                float currentPercent = Mathf.Lerp(-100f, 0f, t);
+                _gameOverPanel.style.bottom = Length.Percent(currentPercent);
+            }
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        // Snap to final values
+        if (_scoreLabel != null) _scoreLabel.style.translate = new Translate(0, targetScoreY, 0);
+        if (_gameOverPanel != null) _gameOverPanel.style.bottom = Length.Percent(0);
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void GoHome()
+    {
+        SceneManager.LoadScene("Main Menu"); 
     }
 }

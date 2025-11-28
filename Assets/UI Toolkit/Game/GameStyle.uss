@@ -1,3 +1,4 @@
+/* --- Global --- */
 .root-container {
     flex-grow: 1;
     width: 100%;
@@ -5,109 +6,148 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 50px;
+    /* CHANGED: Increased from 20px to 40px to push Score DOWN by 20px */
+    padding-top: 40px;
+    -unity-font-definition: url("project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&guid=68bbb28b264221142b18359522007732&type=3#Humanist521LightBT");
 }
 
+/* --- Score Label --- */
 .score-label {
-    font-size: 161px;
+    /* Kept previous size */
+    font-size: 228px;
     -unity-font-style: bold;
     color: rgb(255, 255, 255);
     -unity-text-align: upper-center;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 0px;
 }
 
-/* --- Pause Button (Top Left) --- */
+/* --- Pause Button --- */
 .pause-btn {
     position: absolute;
-    top: 20px;   /* Adjust for notch if needed */
-    left: 20px;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0,0,0,0); /* Transparent */
+    top: 30px;
+    left: 30px;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0,0,0,0);
     border-width: 0;
     justify-content: center;
     align-items: center;
 }
-
-.pause-btn:active {
-    opacity: 0.6;
-    scale: 0.9;
-}
+.pause-btn:active { opacity: 0.6; scale: 0.9; }
 
 .pause-icon {
-    width: 60px;
-    height: 60px;
+    width: 100px; height: 100px;
     -unity-background-scale-mode: scale-to-fit;
     -unity-background-image-tint-color: white;
 }
 
-/* --- Pause Overlay (Fullscreen) --- */
-.pause-overlay {
+/* --- GAME OVER PANEL --- */
+.game-over-panel {
     position: absolute;
     width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(12, 12, 18, 0.95); /* Deep dark blue/black, mostly opaque */
+    height: 75%;
+    bottom: -100%;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 220px;
 }
 
-.pause-content {
+/* Best Score Section */
+.best-score-container {
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    margin-bottom: 30px;
 }
-
-.pause-title {
-    font-size: 80px;
+.best-score-val {
+    font-size: 130px;
     color: white;
-    margin-bottom: 50px;
+    -unity-font-style: bold;
+    margin: 0; padding: 0;
+}
+.best-score-label {
+    font-size: 40px;
+    color: rgba(255,255,255,0.7);
+    margin: 0; padding: 0;
     -unity-font-style: bold;
 }
 
-/* --- Resume Button --- */
-.resume-btn {
-    width: 200px; /* Adjusted size for icon button */
+/* "GAME OVER!" */
+.game-over-text {
+    font-size: 130px;
+    color: white;
+    margin-bottom: 100px;
+    -unity-font-style: normal;
+}
+
+/* Replay Button (Black Box) */
+.replay-btn {
+    width: 80%;
     height: 200px;
-    background-color: white;
-    border-radius: 100px; /* Circle */
-    justify-content: center;
-    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
     border-width: 0;
-    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
 }
+.replay-btn:active { background-color: rgba(0,0,0,0.5); scale: 0.98; }
 
-/* --- The Resume Icon class ---  */
-.resume-icon {
-    width: 100px;
-    height: 100px;
+.replay-icon {
+    width: 115px; height: 115px;
     -unity-background-scale-mode: scale-to-fit;
-    -unity-background-image-tint-color: black; /* Black icon on White button */
+    -unity-background-image-tint-color: white;
 }
 
-.resume-btn:active {
-    background-color: rgb(200, 200, 200);
-    scale: 0.95;
+/* Bottom Buttons Row */
+.bottom-btn-row {
+    flex-direction: row;
+    width: 95%;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-bottom: 60px;
 }
 
-.resume-text {
-    font-size: 40px;
+.bottom-icon-btn {
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-width: 0;
+    width: 20%;
+}
+.bottom-icon-btn:active { opacity: 0.6; }
+
+.bottom-icon {
+    width: 115px; height: 115px;
+    margin-bottom: 15px;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: black;
+}
+
+.bottom-icon-text {
+    font-size: 35px;
     color: black;
     -unity-font-style: bold;
 }
 
-/* --- Countdown Label --- */
+/* --- Pause Overlay & Countdown --- */
+.pause-overlay {
+    position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+    background-color: rgba(12, 12, 18, 0.95);
+    align-items: center; justify-content: center;
+}
+.resume-btn {
+    width: 250px; height: 250px;
+    background-color: white; border-radius: 125px;
+    justify-content: center; align-items: center; border-width: 0;
+}
+.resume-icon {
+    width: 120px; height: 120px;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: black;
+}
 .countdown-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-
-    font-size: 300px;
-    color: white;
-
-    -unity-font-style: bold;
-    text-shadow: 5px 5px 0 rgba(0,0,0,0.5);
+    position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+    font-size: 300px; color: white;
+    -unity-font-style: bold; text-shadow: 5px 5px 0 rgba(0,0,0,0.5);
 }
