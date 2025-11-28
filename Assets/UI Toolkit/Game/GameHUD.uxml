@@ -2,5 +2,18 @@
     <Style src="project://database/Assets/UI%20Toolkit/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=93b361784326ecc4ab8a59bbef0771a0&amp;type=3#GameStyle" />
     <ui:VisualElement name="Root" class="root-container">
         <ui:Label text="0" name="ScoreLabel" class="score-label" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
+        <ui:Button name="PauseBtn" class="pause-btn" style="background-size: 150% 150%;">
+            <ui:VisualElement class="pause-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/pause.png?fileID=2800000&amp;guid=3d403e2cd73d6754c8583b64ca674f3c&amp;type=3#pause&quot;); width: 150px; height: 150px;" />
+        </ui:Button>
     </ui:VisualElement>
+    
+    <ui:VisualElement name="PauseOverlay" class="pause-overlay" style="display: none;">
+        <ui:VisualElement class="pause-content">
+            <ui:Button name="ResumeBtn" class="resume-btn">
+                <ui:VisualElement class="resume-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/right.png?fileID=-4345969612696422427&amp;guid=ae5381edd6e9b2d439d6376901b210d2&amp;type=3#right_0&quot;);" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    
+    <ui:Label name="CountdownLabel" text="3" class="countdown-label" style="display: none;" />
 </ui:UXML>
