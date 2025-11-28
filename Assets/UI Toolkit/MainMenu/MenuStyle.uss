@@ -5,7 +5,7 @@
     height: 100%;
     justify-content: space-between;
     padding: 40px 40px;
-    background-color: rgba(0, 0, 0, 0); /* Transparent */
+    background-color: rgba(0, 0, 0, 0);
 }
 
 /* --- Top Bar --- */
@@ -17,21 +17,18 @@
     align-items: flex-start;
 }
 
-/* Settings Icon */
 .icon-btn {
     width: 100px;
     height: 100px;
-    background-color: rgba(0,0,0,0); /* Transparent bg */
+    background-color: rgba(0,0,0,0);
     border-width: 0;
     -unity-background-scale-mode: scale-to-fit;
 }
 
-/* Settings Button specific */
 .settings-btn {
     border-radius: 20px;
 }
 
-/* NEW: Interaction for Settings */
 .settings-btn:active {
     opacity: 0.6;
     scale: 0.9;
@@ -41,15 +38,12 @@
 .profile-container {
     flex-direction: row;
     align-items: center;
-
-    /* NEW: Strip default button styling */
     background-color: rgba(0,0,0,0);
     border-width: 0;
     margin: 0;
     padding: 0;
 }
 
-/* NEW: Interaction for Profile */
 .profile-container:active {
     opacity: 0.6;
     scale: 0.95;
@@ -76,16 +70,16 @@
 .center-area {
     align-items: center;
     justify-content: center;
-    padding-bottom: 200px; /* Push it up a bit visually */
+    padding-bottom: 200px;
 }
 
 .game-title {
-    font-size: 140px; /* Huge Text */
+    font-size: 140px;
     color: white;
     -unity-text-align: middle-center;
     margin-bottom: 40px;
     text-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-    -unity-font-style: normal; /* Keep it clean/thin */
+    -unity-font-style: normal;
 }
 
 .tap-text {
@@ -100,17 +94,16 @@
 .bottom-bar {
     flex-direction: row;
     width: 100%;
-    /* CHANGED: Increased height to 350px to fit 160px icons comfortably */
     height: 350px;
     justify-content: space-around;
-    align-items: center; /* Center content vertically */
+    align-items: center;
     padding-bottom: 10px;
 }
 
 .bottom-nav-btn {
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centers the icon+text group vertically */
+    justify-content: center;
     background-color: rgba(0,0,0,0);
     border-width: 0;
     width: 22%;
@@ -122,19 +115,15 @@
     scale: 0.95;
 }
 
-/* ICONS */
 .nav-icon {
-    /* CHANGED: Increased to 160px */
     width: 160px;
     height: 160px;
     margin-bottom: 10px;
     -unity-background-scale-mode: scale-to-fit;
     border-radius: 10px;
-    /* CHANGED: Prevents icon from getting squished if width is tight */
     flex-shrink: 0;
 }
 
-/* Text Labels */
 .nav-text {
     font-size: 30px;
     color: white;
@@ -144,52 +133,40 @@
 }
 
 /* ===========================
-   SETTINGS OVERLAY STYLES 
+   OVERLAYS
    =========================== */
 
-/* The Fullscreen Dark Overlay */
 .settings-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    /* Very dark, mostly opaque background */
     background-color: rgba(12, 12, 18, 0.95);
-
     align-items: center;
     justify-content: center;
 }
 
-/* The Main Window Box */
 .settings-window {
     width: 80%;
     max-width: 650px;
     height: 500px;
-
-    /* Dark Blue Theme */
     background-color: rgb(43, 43, 61);
     border-radius: 50px;
-
-    /* White Stroke */
     border-width: 4px;
     border-color: white;
-
-    /* Layout: Center items vertically and horizontally */
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-/* "SETTINGS" Title */
 .settings-title {
     font-size: 60px;
     color: white;
-    margin-bottom: 60px; /* Space between title and icons */
+    margin-bottom: 60px;
     -unity-text-align: middle-center;
 }
 
-/* Container for the 3 buttons */
 .settings-row {
     flex-direction: row;
     justify-content: center;
@@ -197,17 +174,14 @@
     width: 100%;
 }
 
-/* The Square Buttons */
 .setting-sq-btn {
     width: 130px;
     height: 130px;
-    margin: 0 25px; /* Spacing between buttons */
+    margin: 0 25px;
     background-color: transparent;
-
     border-width: 3px;
     border-color: white;
     border-radius: 30px;
-
     align-items: center;
     justify-content: center;
 }
@@ -217,26 +191,21 @@
     scale: 0.95;
 }
 
-/* Icons inside the square buttons */
 .setting-icon {
     width: 70px;
     height: 70px;
     -unity-background-scale-mode: scale-to-fit;
-    /* Tint white in case sprite is black */
     -unity-background-image-tint-color: white;
 }
 
-/* The Close (X) Circle Button */
 .close-btn-circle {
     width: 110px;
     height: 110px;
-    margin-top: 60px; /* Distance from window */
-
+    margin-top: 60px;
     background-color: transparent;
     border-width: 4px;
     border-color: white;
-    border-radius: 60px; /* Circle */
-
+    border-radius: 60px;
     align-items: center;
     justify-content: center;
 }
@@ -250,5 +219,100 @@
     font-size: 60px;
     color: white;
     -unity-text-align: middle-center;
-    padding-bottom: 5px; /* Visual centering tweak */
+    padding-bottom: 5px;
+}
+
+/* ===========================
+   LEADERBOARD SPECIFIC
+   =========================== */
+
+/* Bigger window for leaderboard */
+.leaderboard-window {
+    width: 90%;
+    max-width: 700px;
+    height: 75%;
+    background-color: rgb(43, 43, 61);
+    border-radius: 30px;
+    border-width: 4px;
+    border-color: white;
+    align-items: center;
+    padding: 30px;
+}
+
+/* Tabs */
+.tabs-container {
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.tab-btn {
+    flex-grow: 1;
+    background-color: transparent;
+    border-width: 0;
+    color: rgba(255,255,255, 0.5);
+    font-size: 32px;
+    border-radius: 15px;
+}
+
+.tab-active {
+    background-color: white;
+    color: rgb(43, 43, 61);
+    -unity-font-style: bold;
+}
+
+/* List Headers */
+.list-header {
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(255,255,255,0.3);
+    margin-bottom: 10px;
+}
+
+.header-text {
+    color: rgba(255,255,255,0.7);
+    font-size: 24px;
+    -unity-text-align: middle-center;
+}
+
+/* The ListView */
+.leaderboard-list {
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Individual Row (Generated in Code) */
+.rank-row {
+    flex-direction: row;
+    width: 100%;
+    height: 100%; /* Match item-height */
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.row-text {
+    font-size: 30px;
+    color: white;
+}
+
+/* Special Highlight for Player */
+.player-row {
+    background-color: rgba(0, 255, 100, 0.3); /* Green Tint */
+    border-left-width: 10px;
+    border-left-color: rgb(0, 255, 100);
+}
+
+.player-row .row-text {
+    color: rgb(0, 255, 100);
+    -unity-font-style: bold;
 }
