@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Splash%20scene/SplashStyle.uss?fileID=7433441132597879392&amp;guid=b002fde22f4e2db49b3ca9e0df195c59&amp;type=3#SplashStyle" />
+    <ui:VisualElement class="splash-root">
+        <ui:Label text="TRICKY&#10;RING" class="splash-title" style="font-size: 60px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Thin.otf?fileID=12800000&amp;guid=cf931858f221f884eb40d5bba5d5da01&amp;type=3#Metropolis-Thin&quot;);" />
+        <ui:VisualElement class="loading-container">
+            <ui:VisualElement name="LoadingFill" class="loading-fill" />
+        </ui:VisualElement>
+        <ui:Label text="LOADING..." class="loading-text" />
+    </ui:VisualElement>
+</ui:UXML>
