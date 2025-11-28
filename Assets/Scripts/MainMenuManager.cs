@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     public UIDocument uiDocument;
+    public string gameSceneName = "Game";
 
     // UI Elements - Settings
     private VisualElement _settingsOverlay;
@@ -35,29 +37,30 @@ public class MainMenuManager : MonoBehaviour
 
         var root = uiDocument.rootVisualElement;
 
-        // --- 1. SETTINGS LOGIC (From your script) ---
+        // Find the main "Root" container (excludes the Overlays which are siblings)
+        var rootMenu = root.Q<VisualElement>("Root");
+
+        // Register a click event on the background container
+        rootMenu.RegisterCallback<ClickEvent>(OnBackgroundClicked);
+
+
+        // --- 1. SETTINGS LOGIC ---
         _settingsOverlay = root.Q<VisualElement>("SettingsOverlay");
         var settingsBtn = root.Q<Button>("SettingsBtn");
         var closeSettingsBtn = root.Q<Button>("CloseSettingsBtn");
 
-        if (settingsBtn != null) 
-            settingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.Flex;
-        
-        if (closeSettingsBtn != null) 
-            closeSettingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.None;
+        settingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.Flex;
+        closeSettingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.None;
 
-        // --- 2. LEADERBOARD LOGIC (New) ---
+        // --- 2. LEADERBOARD LOGIC ---
         _leaderboardOverlay = root.Q<VisualElement>("LeaderboardOverlay");
         _leaderboardList = root.Q<ListView>("LeaderboardList");
-        
+
         var leaderboardBtn = root.Q<Button>("LeaderboardBtn");
         var closeLbBtn = root.Q<Button>("CloseLeaderboardBtn");
 
-        if (leaderboardBtn != null)
-            leaderboardBtn.clicked += () => OpenLeaderboard("Weekly");
-        
-        if (closeLbBtn != null)
-            closeLbBtn.clicked += () => _leaderboardOverlay.style.display = DisplayStyle.None;
+        leaderboardBtn.clicked += () => OpenLeaderboard("Weekly");
+        closeLbBtn.clicked += () => _leaderboardOverlay.style.display = DisplayStyle.None;
 
         // Tabs
         _tabDaily = root.Q<Button>("TabDaily");
@@ -70,6 +73,31 @@ public class MainMenuManager : MonoBehaviour
 
         // Initialize the ListView
         if (_leaderboardList != null) ConfigureListView();
+    }
+
+    private void OnBackgroundClicked(ClickEvent evt)
+    {
+        // We need to check if the user clicked a Button (or an icon/label inside a Button)
+        // evt.target is the specific element clicked (e.g., the Label inside the button)
+        VisualElement clickedElement = evt.target as VisualElement;
+
+        // Walk up the hierarchy from the clicked element to see if it belongs to a Button
+        while (clickedElement != null && clickedElement != evt.currentTarget)
+        {
+            if (clickedElement is Button)
+            {
+                // We clicked a button! Do NOT start the game.
+                return;
+            }
+            clickedElement = clickedElement.parent;
+        }
+
+        // Double check the element itself (in case it was the button directly)
+        if (evt.target is Button) return;
+
+        // If we passed the checks, it was an empty space click
+        Debug.Log("Empty space tapped! Loading Game...");
+        SceneManager.LoadScene(gameSceneName);
     }
 
     // --- LEADERBOARD HELPER METHODS ---
@@ -93,11 +121,11 @@ public class MainMenuManager : MonoBehaviour
 
         // 2. Generate Data and Refresh
         GenerateFakeData(tabName);
-        
+
         _leaderboardList.itemsSource = _currentData;
         _leaderboardList.Rebuild();
-        
-        _leaderboardList.ScrollToItem(0); 
+
+        _leaderboardList.ScrollToItem(0);
     }
 
     private void ConfigureListView()
@@ -167,7 +195,7 @@ public class MainMenuManager : MonoBehaviour
         int playerScore = PlayerPrefs.GetInt("HighScore", 0);
 
         // Generate 5000 random players
-        var rng = new System.Random(seed.GetHashCode()); 
+        var rng = new System.Random(seed.GetHashCode());
 
         for (int i = 0; i < 5000; i++)
         {
