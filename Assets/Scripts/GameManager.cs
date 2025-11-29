@@ -35,8 +35,14 @@ public class GameManager : MonoBehaviour
     public float uiDuration = 0.8f;     
     public float scoreLabelMoveY = 400f;
 
-    [Header("Spawn Settings")] public LayerMask obstacleLayer;
+    [Header("Spawn Settings")] 
+    public LayerMask obstacleLayer;
     public float pointCheckRadius = 0.8f;
+    
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip gameOverSound;
+
 
     void Awake()
     {
@@ -155,7 +161,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         player.Die();
-        
+        audioSource.PlayOneShot(gameOverSound);
         // Hide Pause Button
         if (_pauseBtn != null) _pauseBtn.style.display = DisplayStyle.None;
 
