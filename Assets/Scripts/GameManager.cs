@@ -195,7 +195,7 @@ private void UpdateScoreUI()
         {
             currentBest = score;
             PlayerPrefs.SetInt("HighScore", currentBest);
-            highestScoreParticle.SetActive(true);
+            StartCoroutine(PlayParticleWithDelay());
         }
         if (_bestScoreLabel != null) _bestScoreLabel.text = currentBest.ToString();
 
@@ -204,6 +204,11 @@ private void UpdateScoreUI()
         StartCoroutine(AnimateGameOverUI());
     }
 
+    IEnumerator PlayParticleWithDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        highestScoreParticle.SetActive(true);
+    }
     private IEnumerator AnimateGameOverUI()
     {
         yield return new WaitForSeconds(1f); // Wait for camera to start/finish logic
