@@ -26,7 +26,7 @@
                 <ui:Label text="No Ads" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;); -unity-font-style: bold;" />
             </ui:Button>
             <ui:Button name="HeartBtn" class="bottom-nav-btn">
-                <ui:VisualElement name="Icon" class="nav-icon heart-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/joystickUp.png?fileID=2800000&amp;guid=fc9183a7f1fca534ebf77d4c129deb04&amp;type=3#joystickUp&quot;);" />
+                <ui:VisualElement name="Icon" class="nav-icon heart-icon" style="background-image: url(&quot;project://database/Assets/UI/Icons/heart.png?fileID=2800000&amp;guid=69ca4050de33bfd41b1c894b0244f942&amp;type=3#heart&quot;); background-size: 120px 120px;" />
                 <ui:Label text="Buy Lives" class="nav-text" style="font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;); -unity-font-style: bold;" />
             </ui:Button>
         </ui:VisualElement>
