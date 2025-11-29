@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour
     [Header("Animation Settings")] public float uiDuration = 0.8f;
     public float scoreLabelMoveY = 400f;
 
-    [Header("Spawn Settings")] public LayerMask obstacleLayer;
+    [Header("Spawn Settings")] 
+    public LayerMask obstacleLayer;
     public float pointCheckRadius = 0.8f;
+    [SerializeField] private GameObject highestScoreParticle;
 
     [Header("Audio")] [SerializeField] AudioSource audioSource;
     [SerializeField] private AudioClip gameOverSound;
@@ -193,6 +195,7 @@ private void UpdateScoreUI()
         {
             currentBest = score;
             PlayerPrefs.SetInt("HighScore", currentBest);
+            highestScoreParticle.SetActive(true);
         }
         if (_bestScoreLabel != null) _bestScoreLabel.text = currentBest.ToString();
 
