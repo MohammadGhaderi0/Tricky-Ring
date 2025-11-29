@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     private Button _homeBtn;
 
     [Header("Game Data")] 
-    public int Score = 0;
-    public int Streak = 1;
+    public int score = 0;
+    public int streak = 1;
     private float _pointSpawnRotationSnapshot;
     private int _itemsCollected = 0;
 
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Score = 0;
-        Streak = 1;
+        score = 0;
+        streak = 1;
         _itemsCollected = 0;
         UpdateScoreUI();
         
@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
 
     public void OnPointCollected()
     {
-        Score += Streak;
-        if (Streak < 4) Streak++;
+        score += streak;
+        if (streak < 4) streak++;
 
         UpdateScoreUI();
         player.IncreaseSpeed(0.02f);
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        if (_scoreLabel != null) _scoreLabel.text = Score.ToString();
+        if (_scoreLabel != null) _scoreLabel.text = score.ToString();
     }
 
     private void SpawnPoint()
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             side = Random.value > 0.5f;
 
             // 1. Keep the check to avoid spawning exactly on top of player
-            if (Mathf.Abs(Mathf.DeltaAngle(player.CurrentAngle, angle)) < 45f) continue;
+            if (Mathf.Abs(Mathf.DeltaAngle(player.currentAngle, angle)) < 45f) continue;
 
             // 2. Calculate potential position
             float r = side ? player.innerRadius : player.outerRadius;
@@ -141,14 +141,14 @@ public class GameManager : MonoBehaviour
         singlePointObject.rotation = Quaternion.Euler(0, 0, angle);
         singlePointObject.gameObject.SetActive(true);
 
-        _pointSpawnRotationSnapshot = player.TotalRotation;
+        _pointSpawnRotationSnapshot = player.totalRotation;
     }
 
     void Update()
     {
-        if (player.TotalRotation - _pointSpawnRotationSnapshot > 360f)
+        if (player.totalRotation - _pointSpawnRotationSnapshot > 360f)
         {
-            if (Streak > 1) Streak = 1;
+            if (streak > 1) streak = 1;
         }
     }
 
@@ -161,9 +161,9 @@ public class GameManager : MonoBehaviour
 
         // Save Best Score
         int currentBest = PlayerPrefs.GetInt("HighScore", 0);
-        if (Score > currentBest)
+        if (score > currentBest)
         {
-            currentBest = Score;
+            currentBest = score;
             PlayerPrefs.SetInt("HighScore", currentBest);
         }
         if (_bestScoreLabel != null) _bestScoreLabel.text = currentBest.ToString();

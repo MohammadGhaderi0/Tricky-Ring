@@ -48,7 +48,7 @@ public class ObstacleManager : MonoBehaviour
 
         foreach (var obs in inactive)
         {
-            float diff = Mathf.Abs(Mathf.DeltaAngle(_player.CurrentAngle, obs.AnglePosition));
+            float diff = Mathf.Abs(Mathf.DeltaAngle(_player.currentAngle, obs.AnglePosition));
             if (diff > safetyMarginDegrees)
             {
                 safeCandidates.Add(obs);
@@ -72,7 +72,7 @@ public class ObstacleManager : MonoBehaviour
 
         foreach (var obs in active)
         {
-            float diff = Mathf.Abs(Mathf.DeltaAngle(_player.CurrentAngle, obs.AnglePosition));
+            float diff = Mathf.Abs(Mathf.DeltaAngle(_player.currentAngle, obs.AnglePosition));
             
             // Reuse your existing safety margin
             if (diff > safetyMarginDegrees)

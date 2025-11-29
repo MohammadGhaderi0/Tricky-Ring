@@ -10,14 +10,18 @@ public class PlayerController : MonoBehaviour
     public float switchSpeed = 10f; 
 
     [Header("State (Read Only)")]
-    public float CurrentAngle; 
-    public float TotalRotation; 
-    public bool IsInner = false;
+    public float currentAngle; 
+    public float totalRotation; 
+    public bool isInner = false;
 
     private float _currentRadius;
     private float _speedMultiplier = 1.0f;
     private bool _isDead = false;
     private Rigidbody2D _rb;
+    
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
 
 
     private void Awake()
@@ -28,7 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _currentRadius = outerRadius;
-        CurrentAngle = 0f; 
+        currentAngle = 0f; 
     }
 
     void Update()
@@ -47,7 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            IsInner = !IsInner;
+            isInner = !isInner;
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
@@ -55,16 +60,16 @@ public class PlayerController : MonoBehaviour
     {
         // 1. Increment Angle
         float step = baseRotationSpeed * _speedMultiplier * Time.fixedDeltaTime;
-        CurrentAngle = (CurrentAngle + step) % 360f;
-        TotalRotation += step;
+        currentAngle = (currentAngle + step) % 360f;
+        totalRotation += step;
 
         // 2. Lerp Radius
-        float targetR = IsInner ? innerRadius : outerRadius;
+        float targetR = isInner ? innerRadius : outerRadius;
         // fixedDeltaTime here as well
         _currentRadius = Mathf.Lerp(_currentRadius, targetR, Time.fixedDeltaTime * switchSpeed);
 
         // 3. Apply Position (Polar to Cartesian)
-        float rad = CurrentAngle * Mathf.Deg2Rad;
+        float rad = currentAngle * Mathf.Deg2Rad;
         Vector3 newPos = new Vector3(Mathf.Cos(rad) * _currentRadius, Mathf.Sin(rad) * _currentRadius, 0);
         
         // Using MovePosition instead of transform.position
