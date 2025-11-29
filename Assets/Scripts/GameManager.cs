@@ -10,15 +10,11 @@ public class GameManager : MonoBehaviour
     [Header("References")] 
     public PlayerController player;
     public ObstacleManager obstacleManager;
-    public CameraController cameraController; // New Reference
-
-    [Tooltip("Drag the single Point object from your scene here")]
+    public CameraController cameraController;
     public Transform singlePointObject;
-
-    [Header("UI References")] 
-    public UIDocument uiDocument;
-
+    
     // UI Elements
+    public UIDocument uiDocument;
     private VisualElement _root;
     private Label _scoreLabel;
     private VisualElement _gameOverPanel;
@@ -32,14 +28,15 @@ public class GameManager : MonoBehaviour
     [Header("Game Data")] 
     public int Score = 0;
     public int Streak = 1;
-
     private float _pointSpawnRotationSnapshot;
     private int _itemsCollected = 0;
 
     [Header("Animation Settings")]
     public float uiDuration = 0.8f;     
-    // How far DOWN the score label should move (pixels)
-    public float scoreLabelMoveY = 400f; 
+    public float scoreLabelMoveY = 400f;
+
+    [Header("Spawn Settings")] public LayerMask obstacleLayer;
+    public float pointCheckRadius = 0.8f;
 
     void Awake()
     {
@@ -89,7 +86,7 @@ public class GameManager : MonoBehaviour
         if (Streak < 4) Streak++;
 
         UpdateScoreUI();
-        player.IncreaseSpeed(0.05f);
+        player.IncreaseSpeed(0.02f);
         _itemsCollected++;
 
         if (_itemsCollected % 2 == 0) obstacleManager.ActivateNextObstacle();
@@ -106,25 +103,41 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPoint()
     {
-        // (Logic unchanged)
         bool valid = false;
         int attempts = 0;
         float angle = 0;
         bool side = false;
 
+        // Loop until we find a valid spot or run out of attempts
         while (!valid && attempts < 20)
         {
+            attempts++;
+            
             angle = Random.Range(0f, 360f);
             side = Random.value > 0.5f;
-            if (Mathf.Abs(Mathf.DeltaAngle(player.CurrentAngle, angle)) < 45f) { attempts++; continue; }
-            if (!obstacleManager.IsPositionOccupied(angle, side)) valid = true;
-            attempts++;
+
+            // 1. Keep the check to avoid spawning exactly on top of player
+            if (Mathf.Abs(Mathf.DeltaAngle(player.CurrentAngle, angle)) < 45f) continue;
+
+            // 2. Calculate potential position
+            float r = side ? player.innerRadius : player.outerRadius;
+            float rad = angle * Mathf.Deg2Rad;
+            Vector2 checkPos = new Vector2(Mathf.Cos(rad) * r, Mathf.Sin(rad) * r);
+
+            // Returns null if no collider is hit in the circle
+            Collider2D hit = Physics2D.OverlapCircle(checkPos, pointCheckRadius, obstacleLayer);
+            
+            if (hit == null) 
+            {
+                valid = true;
+            }
         }
 
-        float r = side ? player.innerRadius : player.outerRadius;
-        float rad = angle * Mathf.Deg2Rad;
+        // Apply position
+        float finalR = side ? player.innerRadius : player.outerRadius;
+        float finalRad = angle * Mathf.Deg2Rad;
 
-        singlePointObject.position = new Vector3(Mathf.Cos(rad) * r, Mathf.Sin(rad) * r, 0);
+        singlePointObject.position = new Vector3(Mathf.Cos(finalRad) * finalR, Mathf.Sin(finalRad) * finalR, 0);
         singlePointObject.rotation = Quaternion.Euler(0, 0, angle);
         singlePointObject.gameObject.SetActive(true);
 

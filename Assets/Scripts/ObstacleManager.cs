@@ -67,7 +67,24 @@ public class ObstacleManager : MonoBehaviour
         var active = sceneObstacles.Where(o => o.IsActive).ToList();
         if (active.Count == 0) return;
 
-        var choice = active[Random.Range(0, active.Count)];
+        // NEW: Filter candidates to only those far enough from the player
+        var safeCandidates = new List<Obstacle>();
+
+        foreach (var obs in active)
+        {
+            float diff = Mathf.Abs(Mathf.DeltaAngle(_player.CurrentAngle, obs.AnglePosition));
+            
+            // Reuse your existing safety margin
+            if (diff > safetyMarginDegrees)
+            {
+                safeCandidates.Add(obs);
+            }
+        }
+
+        // If no obstacles are safe to flip, do nothing (prevent unfair death)
+        if (safeCandidates.Count == 0) return;
+
+        var choice = safeCandidates[Random.Range(0, safeCandidates.Count)];
         choice.ToggleSide();
     }
 
