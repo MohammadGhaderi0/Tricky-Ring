@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -45,10 +46,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip beat4Sound;
     [SerializeField] private AudioClip beat5Sound;
 
+    private const int POINTS_TO_CHANGE_COLOR = 5;
+    private int _remainingPointsToChangeColor;
+
 
     void Awake()
     {
         Instance = this;
+        _remainingPointsToChangeColor = 5;
     }
 
     void Start()
@@ -102,6 +107,18 @@ public class GameManager : MonoBehaviour
 
         singlePointObject.gameObject.SetActive(false);
         SpawnPoint();
+        CheckForBackGroundColorChange();
+    }
+
+    private void CheckForBackGroundColorChange()
+    {
+        _remainingPointsToChangeColor-= streak;
+        if (_remainingPointsToChangeColor < 1)
+        {
+            Debug.Log("Changing color");
+            ColorManager.Instance.NextColor();
+            _remainingPointsToChangeColor = POINTS_TO_CHANGE_COLOR;
+        }
     }
 
     private void PlayScoreSound()
