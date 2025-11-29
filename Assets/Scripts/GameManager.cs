@@ -7,12 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("References")] 
-    public PlayerController player;
+    [Header("References")] public PlayerController player;
     public ObstacleManager obstacleManager;
     public CameraController cameraController;
     public Transform singlePointObject;
-    
+
     // UI Elements
     public UIDocument uiDocument;
     private VisualElement _root;
@@ -20,28 +19,29 @@ public class GameManager : MonoBehaviour
     private VisualElement _gameOverPanel;
     private Label _bestScoreLabel;
     private Button _pauseBtn; // To hide it on game over
-    
+
     // Buttons
     private Button _replayBtn;
     private Button _homeBtn;
 
-    [Header("Game Data")] 
-    public int score = 0;
+    [Header("Game Data")] public int score = 0;
     public int streak = 1;
     private float _pointSpawnRotationSnapshot;
     private int _itemsCollected = 0;
 
-    [Header("Animation Settings")]
-    public float uiDuration = 0.8f;     
+    [Header("Animation Settings")] public float uiDuration = 0.8f;
     public float scoreLabelMoveY = 400f;
 
-    [Header("Spawn Settings")] 
-    public LayerMask obstacleLayer;
+    [Header("Spawn Settings")] public LayerMask obstacleLayer;
     public float pointCheckRadius = 0.8f;
-    
-    [Header("Audio")]
-    [SerializeField] AudioSource audioSource;
+
+    [Header("Audio")] [SerializeField] AudioSource audioSource;
     [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip beat1Sound;
+    [SerializeField] private AudioClip beat2Sound;
+    [SerializeField] private AudioClip beat3Sound;
+    [SerializeField] private AudioClip beat4Sound;
+    [SerializeField] private AudioClip beat5Sound;
 
 
     void Awake()
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             _gameOverPanel = _root.Q<VisualElement>("GameOverPanel");
             _bestScoreLabel = _root.Q<Label>("BestScoreVal");
             _pauseBtn = _root.Q<Button>("PauseBtn");
-            
+
             _replayBtn = _root.Q<Button>("ReplayBtn");
             _homeBtn = _root.Q<Button>("HomeBtn");
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             if (_homeBtn != null) _homeBtn.clicked += GoHome;
 
             // Ensure Game Over panel is hidden/reset at start
-            if (_gameOverPanel != null) _gameOverPanel.style.bottom = Length.Percent(-100); 
+            if (_gameOverPanel != null) _gameOverPanel.style.bottom = Length.Percent(-100);
         }
 
         obstacleManager.Setup(player);
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         streak = 1;
         _itemsCollected = 0;
         UpdateScoreUI();
-        
+
         if (_pauseBtn != null) _pauseBtn.style.display = DisplayStyle.Flex;
 
         obstacleManager.ActivateNextObstacle();
@@ -89,8 +89,8 @@ public class GameManager : MonoBehaviour
     public void OnPointCollected()
     {
         score += streak;
-        if (streak < 4) streak++;
-
+        if (streak < 5) streak++;
+        PlayScoreSound();
         UpdateScoreUI();
         player.IncreaseSpeed(0.02f);
         _itemsCollected++;
@@ -102,7 +102,29 @@ public class GameManager : MonoBehaviour
         SpawnPoint();
     }
 
-    private void UpdateScoreUI()
+    private void PlayScoreSound()
+    {
+        switch (streak)
+        {
+            case 1:
+                audioSource.PlayOneShot(beat1Sound);
+                break;
+            case 2:
+                audioSource.PlayOneShot(beat2Sound);
+                break;
+            case 3:
+                audioSource.PlayOneShot(beat3Sound);
+                break;
+            case 4:
+                audioSource.PlayOneShot(beat4Sound);
+                break;
+            case 5:
+                audioSource.PlayOneShot(beat5Sound);
+                break;
+        }
+    }
+
+private void UpdateScoreUI()
     {
         if (_scoreLabel != null) _scoreLabel.text = score.ToString();
     }
