@@ -26,6 +26,11 @@ public class MainMenuManager : MonoBehaviour
     }
 
     private List<LeaderboardEntry> _currentData = new List<LeaderboardEntry>();
+    
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip proceedSound;
+    [SerializeField] private AudioClip cancelSound;
 
     private void OnEnable()
     {
@@ -49,8 +54,19 @@ public class MainMenuManager : MonoBehaviour
         var settingsBtn = root.Q<Button>("SettingsBtn");
         var closeSettingsBtn = root.Q<Button>("CloseSettingsBtn");
 
-        settingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.Flex;
-        closeSettingsBtn.clicked += () => _settingsOverlay.style.display = DisplayStyle.None;
+        // proceed sound for opening
+        settingsBtn.clicked += () => 
+        {
+            PlaySound(proceedSound);
+            _settingsOverlay.style.display = DisplayStyle.Flex;
+        };
+
+        // cancel sound for closing
+        closeSettingsBtn.clicked += () => 
+        {
+            PlaySound(cancelSound);
+            _settingsOverlay.style.display = DisplayStyle.None;
+        };
 
         // --- 2. LEADERBOARD LOGIC ---
         _leaderboardOverlay = root.Q<VisualElement>("LeaderboardOverlay");
@@ -59,20 +75,53 @@ public class MainMenuManager : MonoBehaviour
         var leaderboardBtn = root.Q<Button>("LeaderboardBtn");
         var closeLbBtn = root.Q<Button>("CloseLeaderboardBtn");
 
-        leaderboardBtn.clicked += () => OpenLeaderboard("Weekly");
-        closeLbBtn.clicked += () => _leaderboardOverlay.style.display = DisplayStyle.None;
+        // proceed sound for opening
+        leaderboardBtn.clicked += () => 
+        {
+            PlaySound(proceedSound);
+            OpenLeaderboard("Weekly");
+        };
 
-        // Tabs
+        // cancel sound for closing
+        closeLbBtn.clicked += () => 
+        {
+            PlaySound(cancelSound);
+            _leaderboardOverlay.style.display = DisplayStyle.None;
+        };
+
+        // Tabs (Proceed sounds)
         _tabDaily = root.Q<Button>("TabDaily");
         _tabWeekly = root.Q<Button>("TabWeekly");
         _tabAllTime = root.Q<Button>("TabAllTime");
 
-        if (_tabDaily != null) _tabDaily.clicked += () => SwitchTab("Daily");
-        if (_tabWeekly != null) _tabWeekly.clicked += () => SwitchTab("Weekly");
-        if (_tabAllTime != null) _tabAllTime.clicked += () => SwitchTab("AllTime");
+        _tabDaily.clicked += () => 
+        {
+            PlaySound(proceedSound);
+            SwitchTab("Daily");
+        };
+
+        _tabWeekly.clicked += () => 
+        {
+            PlaySound(proceedSound);
+            SwitchTab("Weekly");
+        };
+
+        _tabAllTime.clicked += () => 
+        {
+            PlaySound(proceedSound);
+            SwitchTab("AllTime");
+        };
 
         // Initialize the ListView
         if (_leaderboardList != null) ConfigureListView();
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 
     private void OnBackgroundClicked(ClickEvent evt)
@@ -95,8 +144,8 @@ public class MainMenuManager : MonoBehaviour
         // Double check the element itself (in case it was the button directly)
         if (evt.target is Button) return;
 
-        // If we passed the checks, it was an empty space click
-        Debug.Log("Empty space tapped! Loading Game...");
+        // Debug.Log("Empty space tapped. Loading Game...");
+        PlaySound(proceedSound); 
         SceneManager.LoadScene(gameSceneName);
     }
 
