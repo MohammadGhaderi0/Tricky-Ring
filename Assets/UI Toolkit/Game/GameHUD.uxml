@@ -1,73 +1,49 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=93b361784326ecc4ab8a59bbef0771a0&amp;type=3#GameStyle" />
-    
     <ui:VisualElement name="Root" class="root-container">
-        <!-- Current Score (Exists) -->
         <ui:Label text="0" name="ScoreLabel" class="score-label" />
-
-        <!-- Pause Button (Exists) -->
         <ui:Button name="PauseBtn" class="pause-btn">
-            <ui:VisualElement class="pause-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/pause.png&quot;);" />
+            <ui:VisualElement class="pause-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/pause.png?fileID=2800000&amp;guid=3d403e2cd73d6754c8583b64ca674f3c&amp;type=3#pause&quot;);" />
         </ui:Button>
-
-        <!-- NEW: Game Over Panel (Initially Hidden/Off-screen) -->
         <ui:VisualElement name="GameOverPanel" class="game-over-panel">
-            
-            <!-- Best Score Container -->
             <ui:VisualElement class="best-score-container">
                 <ui:Label text="22" name="BestScoreVal" class="best-score-val" />
                 <ui:Label text="BEST" class="best-score-label" />
             </ui:VisualElement>
-
-            <!-- Game Over Text -->
             <ui:Label text="GAME OVER!" class="game-over-text" />
-
-            <!-- Replay Button (Black, low alpha) -->
             <ui:Button name="ReplayBtn" class="replay-btn">
-                <ui:VisualElement class="replay-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/right.png&quot;);" />
+                <ui:VisualElement class="replay-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/right.png?fileID=-4345969612696422427&amp;guid=ae5381edd6e9b2d439d6376901b210d2&amp;type=3#right_0&quot;);" />
             </ui:Button>
-
-            <!-- Bottom Buttons Row -->
             <ui:VisualElement class="bottom-btn-row">
-                <!-- Right to Left: Home, NoAds, Scores, Share, Rate (Order in DOM is Left->Right, usually) -->
-                <!-- You asked for specific order, I will arrange them visually or by order here -->
-                
                 <ui:Button name="RateBtn" class="bottom-icon-btn">
-                     <ui:VisualElement class="bottom-icon icon-star" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/star.png&quot;);" />
-                     <ui:Label text="RATE" class="bottom-icon-text" />
+                    <ui:VisualElement class="bottom-icon icon-star" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/star.png?fileID=4815476061570213978&amp;guid=3a65417633d0d5c469ec65e13211f5ba&amp;type=3#star_0&quot;);" />
+                    <ui:Label text="RATE" class="bottom-icon-text" />
                 </ui:Button>
-
                 <ui:Button name="ShareBtn" class="bottom-icon-btn">
-                     <ui:VisualElement class="bottom-icon icon-share" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/share2.png&quot;);" />
-                     <ui:Label text="SHARE" class="bottom-icon-text" />
+                    <ui:VisualElement class="bottom-icon icon-share" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/share2.png?fileID=9206341831341226376&amp;guid=b2722d0334058804ebe242503de3015c&amp;type=3#share2_0&quot;);" />
+                    <ui:Label text="SHARE" class="bottom-icon-text" />
                 </ui:Button>
-
                 <ui:Button name="ScoresBtn" class="bottom-icon-btn">
-                     <ui:VisualElement class="bottom-icon icon-bars" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/leaderboardsComplex.png&quot;);" />
-                     <ui:Label text="SCORES" class="bottom-icon-text" />
+                    <ui:VisualElement class="bottom-icon icon-bars" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/leaderboardsComplex.png?fileID=6125174134754278175&amp;guid=367fe106d1830094492148a402e52eaf&amp;type=3#leaderboardsComplex_0&quot;);" />
+                    <ui:Label text="SCORES" class="bottom-icon-text" />
                 </ui:Button>
-                
                 <ui:Button name="NoAdsBtn" class="bottom-icon-btn">
-                     <ui:VisualElement class="bottom-icon icon-noads" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/movie.png&quot;);" />
-                     <ui:Label text="NO ADS" class="bottom-icon-text" />
+                    <ui:VisualElement class="bottom-icon icon-noads" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/movie.png?fileID=21300000&amp;guid=f7edd997915cdfd4a85835be1c9fd0a2&amp;type=3#movie&quot;);" />
+                    <ui:Label text="NO ADS" class="bottom-icon-text" />
                 </ui:Button>
-
                 <ui:Button name="HomeBtn" class="bottom-icon-btn">
-                     <ui:VisualElement class="bottom-icon icon-home" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/home.png&quot;);" />
-                     <ui:Label text="HOME" class="bottom-icon-text" />
+                    <ui:VisualElement class="bottom-icon icon-home" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/home.png?fileID=7635013726552783190&amp;guid=bbd90d57a8efa7846a7001dda8fa1b16&amp;type=3#home_0&quot;);" />
+                    <ui:Label text="HOME" class="bottom-icon-text" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    
-    <!-- Pause Overlay (Keep Existing) -->
     <ui:VisualElement name="PauseOverlay" class="pause-overlay" style="display: none;">
         <ui:VisualElement class="pause-content">
             <ui:Button name="ResumeBtn" class="resume-btn">
-                <ui:VisualElement class="resume-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/right.png&quot;);" />
+                <ui:VisualElement class="resume-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/right.png?fileID=-4345969612696422427&amp;guid=ae5381edd6e9b2d439d6376901b210d2&amp;type=3#right_0&quot;);" />
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
-    
     <ui:Label name="CountdownLabel" text="3" class="countdown-label" style="display: none;" />
 </ui:UXML>
