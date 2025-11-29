@@ -18,6 +18,11 @@ public class SettingsController : MonoBehaviour
 
     private VisualElement _vibIconElement;
     private VisualElement _soundIconElement;
+    
+    [Header("Audio Settings")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip proceedSound;
+    [SerializeField] AudioClip cancelSound;
 
     private void OnEnable()
     {
@@ -39,10 +44,33 @@ public class SettingsController : MonoBehaviour
         if (vibBtn != null) _vibIconElement = vibBtn.Q<VisualElement>(className: "setting-icon");
         if (soundBtn != null) _soundIconElement = soundBtn.Q<VisualElement>(className: "setting-icon");
 
-        // 3. Register Click Events
-        if (vibBtn != null) vibBtn.clicked += ToggleVibration;
-        if (soundBtn != null) soundBtn.clicked += ToggleSound;
-        if (helpBtn != null) helpBtn.clicked += OpenWebsite;
+        // 3. Register Click Events with Sound
+        if (vibBtn != null) 
+        {
+            vibBtn.clicked += () => 
+            {
+                PlaySound(proceedSound);
+                ToggleVibration();
+            };
+        }
+
+        if (soundBtn != null) 
+        {
+            soundBtn.clicked += () => 
+            {
+                PlaySound(proceedSound);
+                ToggleSound();
+            };
+        }
+
+        if (helpBtn != null) 
+        {
+            helpBtn.clicked += () => 
+            {
+                PlaySound(proceedSound);
+                OpenWebsite();
+            };
+        }
 
         // 4. Initialize State from PlayerPrefs
         LoadSettings();
@@ -50,6 +78,14 @@ public class SettingsController : MonoBehaviour
         // 5. Update Visuals
         UpdateVibIcon();
         UpdateSoundIcon();
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 
     private void LoadSettings()

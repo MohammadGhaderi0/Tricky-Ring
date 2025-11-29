@@ -26,9 +26,10 @@ public class MainMenuManager : MonoBehaviour
     }
 
     private List<LeaderboardEntry> _currentData = new List<LeaderboardEntry>();
-    
-    [Header("Audio")]
-    [SerializeField] AudioSource audioSource;
+
+    [Header("Audio Settings")] [SerializeField]
+    AudioSource audioSource;
+
     [SerializeField] private AudioClip proceedSound;
     [SerializeField] private AudioClip cancelSound;
 
@@ -55,14 +56,14 @@ public class MainMenuManager : MonoBehaviour
         var closeSettingsBtn = root.Q<Button>("CloseSettingsBtn");
 
         // proceed sound for opening
-        settingsBtn.clicked += () => 
+        settingsBtn.clicked += () =>
         {
             PlaySound(proceedSound);
             _settingsOverlay.style.display = DisplayStyle.Flex;
         };
 
         // cancel sound for closing
-        closeSettingsBtn.clicked += () => 
+        closeSettingsBtn.clicked += () =>
         {
             PlaySound(cancelSound);
             _settingsOverlay.style.display = DisplayStyle.None;
@@ -76,14 +77,14 @@ public class MainMenuManager : MonoBehaviour
         var closeLbBtn = root.Q<Button>("CloseLeaderboardBtn");
 
         // proceed sound for opening
-        leaderboardBtn.clicked += () => 
+        leaderboardBtn.clicked += () =>
         {
             PlaySound(proceedSound);
             OpenLeaderboard("Weekly");
         };
 
         // cancel sound for closing
-        closeLbBtn.clicked += () => 
+        closeLbBtn.clicked += () =>
         {
             PlaySound(cancelSound);
             _leaderboardOverlay.style.display = DisplayStyle.None;
@@ -94,23 +95,26 @@ public class MainMenuManager : MonoBehaviour
         _tabWeekly = root.Q<Button>("TabWeekly");
         _tabAllTime = root.Q<Button>("TabAllTime");
 
-        _tabDaily.clicked += () => 
-        {
-            PlaySound(proceedSound);
-            SwitchTab("Daily");
-        };
+        if (_tabDaily != null)
+            _tabDaily.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                SwitchTab("Daily");
+            };
 
-        _tabWeekly.clicked += () => 
-        {
-            PlaySound(proceedSound);
-            SwitchTab("Weekly");
-        };
+        if (_tabWeekly != null)
+            _tabWeekly.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                SwitchTab("Weekly");
+            };
 
-        _tabAllTime.clicked += () => 
-        {
-            PlaySound(proceedSound);
-            SwitchTab("AllTime");
-        };
+        if (_tabAllTime != null)
+            _tabAllTime.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                SwitchTab("AllTime");
+            };
 
         // Initialize the ListView
         if (_leaderboardList != null) ConfigureListView();
@@ -138,15 +142,40 @@ public class MainMenuManager : MonoBehaviour
                 // We clicked a button! Do NOT start the game.
                 return;
             }
+
             clickedElement = clickedElement.parent;
         }
 
         // Double check the element itself (in case it was the button directly)
         if (evt.target is Button) return;
 
-        // Debug.Log("Empty space tapped. Loading Game...");
-        PlaySound(proceedSound); 
+        // If we passed the checks, it was an empty space click
+        Debug.Log("Empty space tapped! Loading Game...");
+
+        // Play the sound on a persistent object so it doesn't cut off
+        PlaySoundCrossScene(proceedSound);
+
         SceneManager.LoadScene(gameSceneName);
+    }
+
+    // New helper method: Creates a temporary object that survives the scene load
+    private void PlaySoundCrossScene(AudioClip clip)
+    {
+        GameObject tempAudioObj = new GameObject("TempAudio_Transition");
+        DontDestroyOnLoad(tempAudioObj);
+
+        AudioSource tempSource = tempAudioObj.AddComponent<AudioSource>();
+        tempSource.clip = clip;
+
+        // Copy volume/pitch from the main source to maintain consistency
+        tempSource.volume = audioSource.volume;
+        tempSource.pitch = audioSource.pitch;
+
+
+        tempSource.Play();
+
+        // Destroy the temporary object after the clip has finished playing
+        Destroy(tempAudioObj, clip.length);
     }
 
     // --- LEADERBOARD HELPER METHODS ---
