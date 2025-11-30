@@ -1,42 +1,50 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class FPSCounter : MonoBehaviour
+[RequireComponent(typeof(UIDocument))]
+public class FpsCounter : MonoBehaviour
 {
     private Label _fpsLabel;
     private float _timer;
     private float _deltaTime;
-    
-    // How often to update the text (0.5s is readable)
     private const float RefreshRate = 0.5f; 
+
+    private StyleColor _goodColor = new StyleColor(new Color(1, 1, 1, 0.5f));
+    private StyleColor _badColor = new StyleColor(Color.red);
 
     private void OnEnable()
     {
         var uiDoc = GetComponent<UIDocument>();
-        var root = uiDoc.rootVisualElement;
-
-        _fpsLabel = root.Q<Label>("FpsLabel");
+        if (uiDoc != null)
+        {
+            _fpsLabel = uiDoc.rootVisualElement.Q<Label>("FpsLabel");
+        }
     }
 
     private void Update()
     {
-        // 1. Calculate the time difference smoothly
+        // Smooth out the delta time
         _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
 
-        // 2. Only update the text periodically to save CPU and prevent flickering
         _timer += Time.unscaledDeltaTime;
         if (_timer >= RefreshRate)
         {
             if (_fpsLabel != null)
             {
+                // Calculate the exact integer we want to show
                 float fps = 1.0f / _deltaTime;
-                _fpsLabel.text = Mathf.CeilToInt(fps) + " FPS";
+                int displayFps = Mathf.CeilToInt(fps);
 
-                // Optional: Color code low FPS warnings
-                if (fps < 30) 
-                    _fpsLabel.style.color = new StyleColor(Color.red);
+                _fpsLabel.text = displayFps + " FPS";
+
+                if (displayFps < 30) 
+                {
+                    _fpsLabel.style.color = _badColor;
+                }
                 else 
-                    _fpsLabel.style.color = new StyleColor(new Color(1, 1, 1, 0.5f));
+                {
+                    _fpsLabel.style.color = _goodColor;
+                }
             }
             _timer = 0;
         }
