@@ -164,6 +164,7 @@ public class MainMenuManager : MonoBehaviour
         tempSource.clip = clip;
 
         // Copy volume/pitch from the main source to maintain consistency
+        tempSource.mute = audioSource.mute;
         tempSource.volume = audioSource.volume;
         tempSource.pitch = audioSource.pitch;
 
