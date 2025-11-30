@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=93b361784326ecc4ab8a59bbef0771a0&amp;type=3#GameStyle" />
     <ui:VisualElement name="Root" class="root-container">
-        <ui:Label text="0" name="ScoreLabel" class="score-label" />
+        <ui:Label text="0" name="ScoreLabel" class="score-label" style="-unity-font-style: normal; margin-top: 30px;" />
         <ui:Button name="PauseBtn" class="pause-btn">
             <ui:VisualElement class="pause-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/pause.png?fileID=2800000&amp;guid=3d403e2cd73d6754c8583b64ca674f3c&amp;type=3#pause&quot;);" />
         </ui:Button>

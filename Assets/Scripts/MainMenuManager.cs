@@ -42,13 +42,9 @@ public class MainMenuManager : MonoBehaviour
         }
 
         var root = uiDocument.rootVisualElement;
-
-        // Find the main "Root" container (excludes the Overlays which are siblings)
-        var rootMenu = root.Q<VisualElement>("Root");
-
+        var inputArea = root.Q<VisualElement>("InputArea");
         // Register a click event on the background container
-        rootMenu.RegisterCallback<ClickEvent>(OnBackgroundClicked);
-
+        inputArea.RegisterCallback<ClickEvent>(OnBackgroundClicked);
 
         // --- 1. SETTINGS LOGIC ---
         _settingsOverlay = root.Q<VisualElement>("SettingsOverlay");

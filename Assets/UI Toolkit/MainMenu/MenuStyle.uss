@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
     justify-content: space-between;
-    padding: 40px 40px;
+    padding: 40px 40px 150px 40px;
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -315,4 +315,12 @@
 .player-row .row-text {
     color: rgb(0, 255, 100);
     -unity-font-style: bold;
+}
+
+.input-area {
+    flex-grow: 1; /* Fills all empty space in the middle */
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0); /* Transparent */
 }
