@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         }
 
         obstacleManager.Setup(player);
+        InitializeSettings();
         StartGame();
     }
 
@@ -91,6 +92,16 @@ public class GameManager : MonoBehaviour
 
         obstacleManager.ActivateNextObstacle();
         SpawnPoint();
+    }
+
+    private void InitializeSettings()
+    {
+        Debug.Log("Initializing Settings");
+        // Initialize Sound
+        audioSource.mute = PlayerPrefs.GetInt("SoundEnabled", 1) == 0;
+        
+        // Initialize Vibration
+        
     }
 
     public void OnPointCollected()
