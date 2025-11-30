@@ -93,8 +93,10 @@ public class SettingsController : MonoBehaviour
         // Load int from prefs (0 = off, 1 = on). Default is 1 (On).
         _isVibrationOn = PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
         _isSoundOn = PlayerPrefs.GetInt("SoundEnabled", 1) == 1;
+        UpdateMainMenuSound();
+        UpdateVibration();
 
-        Debug.Log($"Settings Loaded: Vib={_isVibrationOn}, Sound={_isSoundOn}");
+        Debug.Log($"Settings Loaded:\nVibration={_isVibrationOn}\nSound={_isSoundOn}");
     }
 
     private void ToggleVibration()
@@ -109,6 +111,8 @@ public class SettingsController : MonoBehaviour
         // Visual Update
         UpdateVibIcon();
 
+        // applying settings in main menu
+        UpdateVibration();
         Debug.Log($"Vibration Toggled: {_isVibrationOn}");
     }
 
@@ -123,8 +127,21 @@ public class SettingsController : MonoBehaviour
 
         // Visual Update
         UpdateSoundIcon();
-
+        
+        // applying settings in main menu
+        UpdateMainMenuSound();
         Debug.Log($"Sound Toggled: {_isSoundOn}");
+    }
+
+
+    private void UpdateMainMenuSound()
+    {
+        audioSource.mute = !_isSoundOn;
+    }
+
+    private void UpdateVibration()
+    {
+        // needs to be updated 
     }
 
     private void OpenWebsite()
