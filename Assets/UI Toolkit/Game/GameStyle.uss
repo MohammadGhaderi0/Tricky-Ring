@@ -151,3 +151,13 @@
     font-size: 300px; color: white;
     -unity-font-style: bold; text-shadow: 5px 5px 0 rgba(0,0,0,0.5);
 }
+
+/* --- FPS Counter --- */
+.fps-label {
+    position: absolute;
+    top: 30px;    /* Matches the top alignment of your Pause Button */
+    right: 30px;  /* Puts it on the far right */
+    font-size: 30px; /* Small and unobtrusive */
+    color: rgba(255, 255, 255, 0.5); /* 50% opacity white */
+    -unity-font-style: bold;
+}

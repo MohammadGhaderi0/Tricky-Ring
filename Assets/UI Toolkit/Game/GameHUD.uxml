@@ -5,6 +5,7 @@
         <ui:Button name="PauseBtn" class="pause-btn">
             <ui:VisualElement class="pause-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/pause.png?fileID=2800000&amp;guid=3d403e2cd73d6754c8583b64ca674f3c&amp;type=3#pause&quot;);" />
         </ui:Button>
+        <ui:Label text="60 FPS" name="FpsLabel" class="fps-label" style="margin-top: 10px; margin-right: 10px; font-size: 52px; -unity-font-style: bold;" />
         <ui:VisualElement name="GameOverPanel" class="game-over-panel">
             <ui:VisualElement class="best-score-container">
                 <ui:Label text="22" name="BestScoreVal" class="best-score-val" />
