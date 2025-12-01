@@ -70,6 +70,11 @@
                 <ui:Label text="SCORE" class="header-text" style="width: 30%; -unity-text-align: middle-right;" />
             </ui:VisualElement>
             <ui:ListView name="LeaderboardList" item-height="80" fixed-item-height="80" class="leaderboard-list" />
+            <ui:VisualElement name="StickyPlayerRow" class="rank-row player-row sticky-row" style="display: none;">
+                <ui:Label name="StickyRank" text="999" class="row-text" style="width: 15%; -unity-text-align: middle-center;" />
+                <ui:Label text="YOU" class="row-text" style="width: 55%; -unity-text-align: middle-left; -unity-font-style: bold; color: rgb(0, 255, 100);" />
+                <ui:Label name="StickyScore" text="0" class="row-text" style="width: 30%; -unity-text-align: middle-right;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle">
             <ui:Label text="✕" class="close-text" />

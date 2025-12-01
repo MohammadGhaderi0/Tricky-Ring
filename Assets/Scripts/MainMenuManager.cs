@@ -18,6 +18,11 @@ public class MainMenuManager : MonoBehaviour
     private Label _profileBestScoreLabel;
     private Label _profileTotalGamesLabel;
     private VisualElement _shopOverlay;
+    private VisualElement _stickyPlayerRow;
+    private Label _stickyRankLabel;
+    private Label _stickyScoreLabel;
+    private int _playerIndexInList = -1; // To track where we are
+    
 
     // Data Structure for Leaderboard
     public struct LeaderboardEntry
@@ -78,9 +83,12 @@ public class MainMenuManager : MonoBehaviour
         // --- 2. LEADERBOARD LOGIC ---
         _leaderboardOverlay = root.Q<VisualElement>("LeaderboardOverlay");
         _leaderboardList = root.Q<ListView>("LeaderboardList");
-
         var leaderboardBtn = root.Q<Button>("LeaderboardBtn");
         var closeLbBtn = root.Q<Button>("CloseLeaderboardBtn");
+        _stickyPlayerRow = root.Q<VisualElement>("StickyPlayerRow");
+        _stickyRankLabel = root.Q<Label>("StickyRank");
+        _stickyScoreLabel = root.Q<Label>("StickyScore");
+        _leaderboardList.RegisterCallback<GeometryChangedEvent>(OnLeaderboardGeometryChange);
 
         if (leaderboardBtn != null)
         {
@@ -280,8 +288,17 @@ public class MainMenuManager : MonoBehaviour
 
         _leaderboardList.itemsSource = _currentData;
         _leaderboardList.Rebuild();
-
         _leaderboardList.ScrollToItem(0);
+        // NEW: Update Sticky Row Data
+        if (_playerIndexInList != -1)
+        {
+            var pEntry = _currentData[_playerIndexInList];
+            if (_stickyRankLabel != null) _stickyRankLabel.text = pEntry.rank.ToString();
+            if (_stickyScoreLabel != null) _stickyScoreLabel.text = pEntry.score.ToString("N0");
+        }
+        
+        // Force a check (reset to top)
+        CheckStickyRowVisibility(0);
     }
 
     private void ConfigureListView()
@@ -374,12 +391,19 @@ public class MainMenuManager : MonoBehaviour
         // Sort descending
         _currentData.Sort((a, b) => b.score.CompareTo(a.score));
 
-        // Assign ranks
+        // Assign ranks AND FIND PLAYER
+        _playerIndexInList = -1;
+
         for (int i = 0; i < _currentData.Count; i++)
         {
             var entry = _currentData[i];
             entry.rank = i + 1;
             _currentData[i] = entry;
+
+            if (entry.isPlayer)
+            {
+                _playerIndexInList = i;
+            }
         }
     }
 
@@ -438,5 +462,53 @@ public class MainMenuManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.RevealInFinder(path);
 #endif
+    }
+    
+    private void OnLeaderboardGeometryChange(GeometryChangedEvent evt)
+    {
+        // Only need to do this once to find the scrollview
+        var scrollView = _leaderboardList.Q<ScrollView>();
+        if (scrollView != null)
+        {
+            // Listen to scroll changes
+            scrollView.verticalScroller.valueChanged += (value) =>
+            {
+                CheckStickyRowVisibility(value);
+            };
+        }
+    }
+
+    private void CheckStickyRowVisibility(float scrollValue)
+    {
+        if (_playerIndexInList == -1) return;
+
+        // Calculate visible range
+        float listHeight = _leaderboardList.resolvedStyle.height;
+        float itemHeight = _leaderboardList.fixedItemHeight; // 80
+        
+        // How many items can we see at once?
+        float visibleItemsCount = listHeight / itemHeight;
+
+        // What is the index of the first item at the top?
+        // ScrollValue is usually 0 to HighNumber. 
+        // We can use the ListView's scrollOffset directly if available, 
+        // or calculate from Scroller. 
+        // The safest way in UI Toolkit ListView:
+        var scrollView = _leaderboardList.Q<ScrollView>();
+        float currentScrollY = scrollView.scrollOffset.y;
+        
+        int firstVisibleIndex = (int)(currentScrollY / itemHeight);
+        int lastVisibleIndex = firstVisibleIndex + (int)visibleItemsCount;
+
+        // Logic: If Player is BELOW the view, show sticky row.
+        // We add a small buffer (+1) to make the transition smoother
+        if (_playerIndexInList > lastVisibleIndex)
+        {
+            _stickyPlayerRow.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            _stickyPlayerRow.style.display = DisplayStyle.None;
+        }
     }
 }
