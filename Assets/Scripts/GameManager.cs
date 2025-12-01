@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     public void OnPointCollected()
     {
         score += streak;
-        if (streak < 5) streak++;
+        if (streak < 6) streak++;
         PlayScoreSound();
         UpdateScoreUI();
         player.IncreaseSpeed(0.01f);
@@ -139,19 +139,19 @@ public class GameManager : MonoBehaviour
     {
         switch (streak)
         {
-            case 1:
+            case 2:
                 audioSource.PlayOneShot(beat1Sound);
                 break;
-            case 2:
+            case 3:
                 audioSource.PlayOneShot(beat2Sound);
                 break;
-            case 3:
+            case 4:
                 audioSource.PlayOneShot(beat3Sound);
                 break;
-            case 4:
+            case 5:
                 audioSource.PlayOneShot(beat4Sound);
                 break;
-            case 5:
+            case 6:
                 audioSource.PlayOneShot(beat5Sound);
                 break;
         }
