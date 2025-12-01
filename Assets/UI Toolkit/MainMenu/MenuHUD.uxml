@@ -48,7 +48,7 @@
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button name="CloseSettingsBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
+        <ui:Button name="CloseSettingsBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
@@ -72,7 +72,7 @@
                 <ui:Label name="StickyScore" text="0" class="row-text" style="width: 30%; -unity-text-align: middle-right;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
+        <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
@@ -88,7 +88,7 @@
             </ui:VisualElement>
             <ui:Button name="ExportProfileBtn" text="EXPORT PROFILE" class="export-btn" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
         </ui:VisualElement>
-        <ui:Button name="CloseProfileBtn" class="close-btn-circle">
+        <ui:Button name="CloseProfileBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
@@ -99,7 +99,7 @@
             </ui:VisualElement>
             <ui:Label text="COMING SOON" class="coming-soon-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
         </ui:VisualElement>
-        <ui:Button name="CloseShopBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
+        <ui:Button name="CloseShopBtn" class="close-btn-circle" style="background-image: none; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
