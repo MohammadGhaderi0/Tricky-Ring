@@ -41,23 +41,62 @@ public class ObstacleManager : MonoBehaviour
 
     public void ActivateNextObstacle()
     {
+        // 1. Get all inactive obstacles
         var inactive = sceneObstacles.Where(o => !o.IsActive).ToList();
         if (inactive.Count == 0) return;
 
-        var safeCandidates = new List<Obstacle>();
-
+        // 2. Filter: Keep only those far enough from the player
+        var safeFromPlayer = new List<Obstacle>();
         foreach (var obs in inactive)
         {
             float diff = Mathf.Abs(Mathf.DeltaAngle(_player.currentAngle, obs.AnglePosition));
             if (diff > safetyMarginDegrees)
             {
-                safeCandidates.Add(obs);
+                safeFromPlayer.Add(obs);
             }
         }
 
-        var pool = safeCandidates.Count > 0 ? safeCandidates : inactive;
-        var choice = pool[Random.Range(0, pool.Count)];
+        // 3. Filter: Keep only those that DON'T have active neighbors
+        var safeFromNeighbors = new List<Obstacle>();
+        int count = sceneObstacles.Count;
 
+        foreach (var obs in safeFromPlayer)
+        {
+            // Use modulo (%) to wrap around. 
+            // If ID is 0, (0 - 1 + 12) % 12 = 11.
+            int prevID = (obs.ID - 1 + count) % count;
+            int nextID = (obs.ID + 1) % count;
+
+            // Check if neighbors are active by looking them up in the main list
+            bool isNeighborActive = sceneObstacles[prevID].IsActive || sceneObstacles[nextID].IsActive;
+
+            if (!isNeighborActive)
+            {
+                safeFromNeighbors.Add(obs);
+            }
+        }
+
+        // 4. Selection Logic
+        // Priority 1: Safe from Player AND Safe from Neighbors
+        // Priority 2: Safe from Player (but might have a neighbor)
+        // Priority 3: Any inactive obstacle (emergency fallback)
+        List<Obstacle> pool;
+
+        if (safeFromNeighbors.Count > 0)
+        {
+            pool = safeFromNeighbors;
+        }
+        else if (safeFromPlayer.Count > 0)
+        {
+            pool = safeFromPlayer;
+        }
+        else
+        {
+            pool = inactive;
+        }
+
+        // Pick random and activate
+        var choice = pool[Random.Range(0, pool.Count)];
         bool startInner = Random.value > 0.5f;
         choice.SetState(true, startInner);
     }

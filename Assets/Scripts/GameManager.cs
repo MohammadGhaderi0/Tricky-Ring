@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         if (streak < 5) streak++;
         PlayScoreSound();
         UpdateScoreUI();
-        player.IncreaseSpeed(0.02f);
+        player.IncreaseSpeed(0.01f);
         _itemsCollected++;
 
         if (_itemsCollected % 2 == 0) obstacleManager.ActivateNextObstacle();
