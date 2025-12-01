@@ -1,22 +1,19 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MenuStyle.uss?fileID=7433441132597879392&amp;guid=93d2e4a2e228b794697388ec220eac84&amp;type=3#MenuStyle" />
     <ui:VisualElement name="Root" class="root-menu">
-        
         <ui:VisualElement name="TopBar" class="top-bar">
             <ui:Button name="SettingsBtn" class="icon-btn settings-btn" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/gear.png?fileID=2800000&amp;guid=8811ae8cd0358924ab4139b0fb74deee&amp;type=3#gear&quot;); top: -17px; left: -30px; position: absolute; width: 150px; height: 150px;" />
-            <ui:Button name="ProfileContainer" class="profile-container" style="position: absolute; top: -9px; left: auto; right: 11px;">
+            <ui:Button name="ProfileContainer" class="profile-container" style="position: absolute; top: 11px; left: auto; right: 11px;">
                 <ui:Label text="Player" name="PlayerName" class="profile-name" style="font-size: 50px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
                 <ui:VisualElement name="ProfilePic" class="profile-pic" style="width: 130px; height: 130px; background-image: url(&quot;project://database/Assets/UI/Images/Unknown.png?fileID=2800000&amp;guid=5d315731709063846b0d314d9479e6bf&amp;type=3#Unknown&quot;);" />
             </ui:Button>
         </ui:VisualElement>
-
         <ui:VisualElement name="InputArea" class="input-area">
             <ui:VisualElement name="VisualElement" class="center-area">
                 <ui:Label text="TRICKY&#10;RING" class="game-title" style="font-size: 203px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;); top: -200px;" />
                 <ui:Label text="TAP TO START" class="tap-text" style="font-size: 76px; top: -166px; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-
         <ui:VisualElement name="BottomBar" class="bottom-bar">
             <ui:Button name="ShopBtn" class="bottom-nav-btn">
                 <ui:VisualElement name="Icon" class="nav-icon shop-icon" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/shoppingCart.png?fileID=2800000&amp;guid=1c4d1138ae42c7d4d8e684965654588e&amp;type=3#shoppingCart&quot;); -unity-background-scale-mode: scale-and-crop; background-size: contain;" />
@@ -36,7 +33,6 @@
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
-
     <ui:VisualElement name="SettingsOverlay" class="settings-overlay" style="display: none;">
         <ui:VisualElement name="SettingsWindow" class="settings-window">
             <ui:Label text="SETTINGS" class="settings-title" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
@@ -52,7 +48,7 @@
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button name="CloseSettingsBtn" class="close-btn-circle">
+        <ui:Button name="CloseSettingsBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
@@ -76,27 +72,22 @@
                 <ui:Label name="StickyScore" text="0" class="row-text" style="width: 30%; -unity-text-align: middle-right;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle">
+        <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="ProfileOverlay" class="settings-overlay" style="display: none;">
         <ui:VisualElement name="ProfileWindow" class="profile-window">
-            
             <ui:VisualElement class="profile-header">
                 <ui:VisualElement class="profile-pic-large" style="background-image: url(&quot;project://database/Assets/UI/Images/Unknown.png?fileID=2800000&amp;guid=5d315731709063846b0d314d9479e6bf&amp;type=3#Unknown&quot;);" />
                 <ui:Label text="Player" name="ProfileNameOverlay" class="profile-name-large" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
             </ui:VisualElement>
-
             <ui:VisualElement class="profile-stats-container">
                 <ui:Label name="ProfileBestScore" text="BEST SCORE: 0" class="stat-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
                 <ui:Label name="ProfileTotalGames" text="GAMES PLAYED: 0" class="stat-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
             </ui:VisualElement>
-
             <ui:Button name="ExportProfileBtn" text="EXPORT PROFILE" class="export-btn" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
-            
         </ui:VisualElement>
-
         <ui:Button name="CloseProfileBtn" class="close-btn-circle">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
@@ -108,8 +99,7 @@
             </ui:VisualElement>
             <ui:Label text="COMING SOON" class="coming-soon-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
         </ui:VisualElement>
-
-        <ui:Button name="CloseShopBtn" class="close-btn-circle">
+        <ui:Button name="CloseShopBtn" class="close-btn-circle" style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/cross.png?fileID=2800000&amp;guid=75dfa2b0065e22843b4139d910d3c37c&amp;type=3#cross&quot;);">
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
