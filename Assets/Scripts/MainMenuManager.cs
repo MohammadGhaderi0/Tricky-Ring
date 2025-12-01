@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -39,15 +40,10 @@ public class MainMenuManager : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] private AudioClip proceedSound;
     [SerializeField] private AudioClip cancelSound;
+    [SerializeField] private AudioClip startSound;
 
     private void OnEnable()
     {
-        if (uiDocument == null)
-        {
-            Debug.LogError("MainMenuManager: uiDocument is not assigned in the Inspector!");
-            return;
-        }
-
         var root = uiDocument.rootVisualElement;
 
         // --- BACKGROUND CLICK ---
@@ -203,6 +199,15 @@ public class MainMenuManager : MonoBehaviour
                 _shopOverlay.style.display = DisplayStyle.None;
             };
         }
+        
+        // Play Start sound with delay to make sure setting has been applied
+        StartCoroutine(PlayStartAudioWithDelay());
+    }
+
+    private IEnumerator PlayStartAudioWithDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        PlaySound((startSound));
     }
 
     private void PlaySound(AudioClip clip)
