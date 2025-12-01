@@ -7,11 +7,10 @@ public class ColorManager : MonoBehaviour
 
     [Header("Setup")]
     public List<Color> colorPalette; 
-    public float transitionSpeed = 2.0f; // Higher = Faster transition
+    public float transitionSpeed = 2.0f;
 
     // Public read-only access for the painter
     public Color CurrentColor { get; private set; }
-
     private Color _targetColor;
     private int _currentIndex = 0;
 
@@ -33,14 +32,13 @@ public class ColorManager : MonoBehaviour
     {
         if (colorPalette.Count > 0)
         {
-            // Start at the first color immediately
-            _currentIndex = 0;
-            CurrentColor = colorPalette[0];
-            _targetColor = colorPalette[0];
+            // Start with random color
+            _currentIndex = Random.Range(0, colorPalette.Count);
+            CurrentColor = colorPalette[_currentIndex];
+            _targetColor = colorPalette[_currentIndex];
         }
     }
-
-    // Call this function whenever you stack a block successfully
+    
     public void NextColor()
     {
         if (colorPalette.Count == 0) return;
