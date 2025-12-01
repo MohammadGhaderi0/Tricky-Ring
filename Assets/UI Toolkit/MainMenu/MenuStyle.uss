@@ -216,10 +216,12 @@
 }
 
 .close-text {
-    font-size: 60px;
+    font-size: 85px;           /* Increased from 60px */
     color: white;
     -unity-text-align: middle-center;
-    padding-bottom: 5px;
+    padding-bottom: 0px;       /* Remove the padding used for the old symbol */
+    margin-top: -25px;          /* Slight nudge up to center the capital X */
+    -unity-font-style: bold;   /* Crucial: Makes the thin font look like a button icon */
 }
 
 /* ===========================

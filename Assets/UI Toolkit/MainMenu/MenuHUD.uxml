@@ -49,7 +49,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="CloseSettingsBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
-            <ui:Label text="✕" class="close-text" />
+            <ui:Label text="x" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="LeaderboardOverlay" class="settings-overlay" style="display: none;">
@@ -73,7 +73,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="CloseLeaderboardBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
-            <ui:Label text="✕" class="close-text" />
+            <ui:Label text="x" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="ProfileOverlay" class="settings-overlay" style="display: none;">
@@ -89,7 +89,7 @@
             <ui:Button name="ExportProfileBtn" text="EXPORT PROFILE" class="export-btn" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
         </ui:VisualElement>
         <ui:Button name="CloseProfileBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
-            <ui:Label text="✕" class="close-text" />
+            <ui:Label text="x" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="ShopOverlay" class="settings-overlay" style="display: none;">
@@ -99,8 +99,8 @@
             </ui:VisualElement>
             <ui:Label text="COMING SOON" class="coming-soon-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
         </ui:VisualElement>
-        <ui:Button name="CloseShopBtn" class="close-btn-circle" style="background-image: none; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
-            <ui:Label text="✕" class="close-text" />
+        <ui:Button name="CloseShopBtn" class="close-btn-circle" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);">
+            <ui:Label text="x" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
 </ui:UXML>
