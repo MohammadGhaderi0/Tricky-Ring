@@ -9,11 +9,9 @@ public class GameHUDController : MonoBehaviour
     private VisualElement _pauseOverlay;
     private Label _countdownLabel;
     private Button _resumeBtn;
-    
-    // Added: Reference for the share button
     private Button _shareBtn;
-
     private bool _isResuming = false;
+    [SerializeField] AudioSource audioSource;
 
     private void OnEnable()
     {

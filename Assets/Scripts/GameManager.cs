@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip beat3Sound;
     [SerializeField] private AudioClip beat4Sound;
     [SerializeField] private AudioClip beat5Sound;
+    [SerializeField] private AudioClip proceedSound;
+    [SerializeField] private AudioClip cancelSound;
+    
 
     private const int POINTS_TO_CHANGE_COLOR = 5;
     private int _remainingPointsToChangeColor;
@@ -283,11 +286,28 @@ private void UpdateScoreUI()
 
     private void RestartGame()
     {
+        PlaySoundCrossScene(proceedSound);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void GoHome()
     {
+        PlaySoundCrossScene(cancelSound);
         SceneManager.LoadScene("Main Menu"); 
+    }
+    
+        
+    private void PlaySoundCrossScene(AudioClip clip)
+    {
+        GameObject tempAudioObj = new GameObject("TempAudio_Transition");
+        DontDestroyOnLoad(tempAudioObj);
+
+        AudioSource tempSource = tempAudioObj.AddComponent<AudioSource>();
+        tempSource.clip = clip;
+        tempSource.mute = PlayerPrefs.GetInt("SoundEnabled", 0) == 0 ;
+        tempSource.pitch = 1.5f;
+        tempSource.Play();
+        // Destroy the temporary object after the clip has finished playing
+        Destroy(tempAudioObj, clip.length);
     }
 }
