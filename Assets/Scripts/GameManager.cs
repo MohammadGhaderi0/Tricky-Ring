@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetInt("TotalGames",PlayerPrefs.GetInt("TotalGames") + 1);
+        PlayerPrefs.Save();
         score = 0;
         streak = 1;
         _itemsCollected = 0;
