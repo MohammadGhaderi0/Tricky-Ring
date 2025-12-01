@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class MainMenuManager : MonoBehaviour
     private VisualElement _leaderboardOverlay;
     private ListView _leaderboardList;
     private Button _tabDaily, _tabWeekly, _tabAllTime;
+
+    // UI Elements - Profile
+    private VisualElement _profileOverlay;
+    private Label _profileBestScoreLabel;
+    private Label _profileTotalGamesLabel;
 
     // Data Structure for Leaderboard
     public struct LeaderboardEntry
@@ -42,28 +48,36 @@ public class MainMenuManager : MonoBehaviour
         }
 
         var root = uiDocument.rootVisualElement;
+
+        // --- BACKGROUND CLICK ---
         var inputArea = root.Q<VisualElement>("InputArea");
-        // Register a click event on the background container
-        inputArea.RegisterCallback<ClickEvent>(OnBackgroundClicked);
+        if (inputArea != null)
+        {
+            inputArea.RegisterCallback<ClickEvent>(OnBackgroundClicked);
+        }
 
         // --- 1. SETTINGS LOGIC ---
         _settingsOverlay = root.Q<VisualElement>("SettingsOverlay");
         var settingsBtn = root.Q<Button>("SettingsBtn");
         var closeSettingsBtn = root.Q<Button>("CloseSettingsBtn");
 
-        // proceed sound for opening
-        settingsBtn.clicked += () =>
+        if (settingsBtn != null)
         {
-            PlaySound(proceedSound);
-            _settingsOverlay.style.display = DisplayStyle.Flex;
-        };
+            settingsBtn.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                _settingsOverlay.style.display = DisplayStyle.Flex;
+            };
+        }
 
-        // cancel sound for closing
-        closeSettingsBtn.clicked += () =>
+        if (closeSettingsBtn != null)
         {
-            PlaySound(cancelSound);
-            _settingsOverlay.style.display = DisplayStyle.None;
-        };
+            closeSettingsBtn.clicked += () =>
+            {
+                PlaySound(cancelSound);
+                _settingsOverlay.style.display = DisplayStyle.None;
+            };
+        }
 
         // --- 2. LEADERBOARD LOGIC ---
         _leaderboardOverlay = root.Q<VisualElement>("LeaderboardOverlay");
@@ -72,45 +86,93 @@ public class MainMenuManager : MonoBehaviour
         var leaderboardBtn = root.Q<Button>("LeaderboardBtn");
         var closeLbBtn = root.Q<Button>("CloseLeaderboardBtn");
 
-        // proceed sound for opening
-        leaderboardBtn.clicked += () =>
+        if (leaderboardBtn != null)
         {
-            PlaySound(proceedSound);
-            OpenLeaderboard("Weekly");
-        };
+            leaderboardBtn.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                OpenLeaderboard("Weekly");
+            };
+        }
 
-        // cancel sound for closing
-        closeLbBtn.clicked += () =>
+        if (closeLbBtn != null)
         {
-            PlaySound(cancelSound);
-            _leaderboardOverlay.style.display = DisplayStyle.None;
-        };
+            closeLbBtn.clicked += () =>
+            {
+                PlaySound(cancelSound);
+                _leaderboardOverlay.style.display = DisplayStyle.None;
+            };
+        }
 
-        // Tabs (Proceed sounds)
+        // --- 3. PROFILE LOGIC (NEW) ---
+        _profileOverlay = root.Q<VisualElement>("ProfileOverlay");
+        _profileBestScoreLabel = root.Q<Label>("ProfileBestScore");
+        _profileTotalGamesLabel = root.Q<Label>("ProfileTotalGames");
+
+        // "ProfileContainer" is the button name in your original UXML (top-right)
+        var profileBtn = root.Q<Button>("ProfileContainer");
+        var closeProfileBtn = root.Q<Button>("CloseProfileBtn");
+        var exportProfileBtn = root.Q<Button>("ExportProfileBtn");
+
+        if (profileBtn != null)
+        {
+            profileBtn.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                OpenProfile();
+            };
+        }
+
+        if (closeProfileBtn != null)
+        {
+            closeProfileBtn.clicked += () =>
+            {
+                PlaySound(cancelSound);
+                _profileOverlay.style.display = DisplayStyle.None;
+            };
+        }
+
+        if (exportProfileBtn != null)
+        {
+            exportProfileBtn.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                ExportProfileJSON();
+                Debug.Log("Exporting Profile Data...");
+            };
+        }
+
+        // --- TABS LOGIC ---
         _tabDaily = root.Q<Button>("TabDaily");
         _tabWeekly = root.Q<Button>("TabWeekly");
         _tabAllTime = root.Q<Button>("TabAllTime");
 
         if (_tabDaily != null)
+        {
             _tabDaily.clicked += () =>
             {
                 PlaySound(proceedSound);
                 SwitchTab("Daily");
             };
+        }
 
         if (_tabWeekly != null)
+        {
             _tabWeekly.clicked += () =>
             {
                 PlaySound(proceedSound);
                 SwitchTab("Weekly");
             };
+        }
 
         if (_tabAllTime != null)
+        {
             _tabAllTime.clicked += () =>
             {
                 PlaySound(proceedSound);
                 SwitchTab("AllTime");
             };
+        }
 
         // Initialize the ListView
         if (_leaderboardList != null) ConfigureListView();
@@ -300,5 +362,62 @@ public class MainMenuManager : MonoBehaviour
             entry.rank = i + 1;
             _currentData[i] = entry;
         }
+    }
+
+    private void OpenProfile()
+    {
+        // Fetch data from PlayerPrefs
+        int bestScore = PlayerPrefs.GetInt("HighScore", 0);
+        int totalGames = PlayerPrefs.GetInt("TotalGames", 0);
+
+        // Update UI
+        if (_profileBestScoreLabel != null)
+            _profileBestScoreLabel.text = $"BEST SCORE: {bestScore}";
+
+        if (_profileTotalGamesLabel != null)
+            _profileTotalGamesLabel.text = $"GAMES PLAYED: {totalGames}";
+
+        // Show Overlay
+        _profileOverlay.style.display = DisplayStyle.Flex;
+    }
+
+    private void ExportProfileJSON()
+    {
+        // 1. Create a new data object
+        UserProfileData data = new UserProfileData();
+
+        // 2. Gather Data
+        // Getting name from the UI Label (ensure you have a reference to it, or use a default)
+        var nameLabel = uiDocument.rootVisualElement.Q<Label>("PlayerName");
+        data.playerName = nameLabel != null ? nameLabel.text : "Unknown Player";
+
+        // Getting Stats from PlayerPrefs
+        data.highScore = PlayerPrefs.GetInt("HighScore", 0);
+        data.totalGames = PlayerPrefs.GetInt("TotalGames", 0);
+
+        // Getting Settings
+        data.soundEnabled = PlayerPrefs.GetInt("SoundEnabled", 1) == 1;
+        data.vibrationEnabled = PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
+
+        // Getting Meta Data
+        data.appVersion = Application.version;
+        data.timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        // 3. Convert to JSON string
+        // 'true' makes the JSON pretty-printed (readable with indentation)
+        string jsonString = JsonUtility.ToJson(data, true);
+
+        // 4. Write to file
+        string fileName = "UserProfile_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
+        string path = Path.Combine(Application.persistentDataPath, fileName);
+
+        File.WriteAllText(path, jsonString);
+
+        Debug.Log($"Profile Exported successfully to: {path}");
+
+        // Optional: Open the file location (Works on Windows/Mac Editor)
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.RevealInFinder(path);
+#endif
     }
 }

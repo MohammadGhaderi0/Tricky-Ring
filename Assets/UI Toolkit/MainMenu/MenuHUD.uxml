@@ -75,4 +75,25 @@
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
+    <ui:VisualElement name="ProfileOverlay" class="settings-overlay" style="display: none;">
+        <ui:VisualElement name="ProfileWindow" class="profile-window">
+            
+            <ui:VisualElement class="profile-header">
+                <ui:VisualElement class="profile-pic-large" style="background-image: url(&quot;project://database/Assets/UI/Images/Unknown.png?fileID=2800000&amp;guid=5d315731709063846b0d314d9479e6bf&amp;type=3#Unknown&quot;);" />
+                <ui:Label text="Player" name="ProfileNameOverlay" class="profile-name-large" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="profile-stats-container">
+                <ui:Label name="ProfileBestScore" text="BEST SCORE: 0" class="stat-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
+                <ui:Label name="ProfileTotalGames" text="GAMES PLAYED: 0" class="stat-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
+            </ui:VisualElement>
+
+            <ui:Button name="ExportProfileBtn" text="EXPORT PROFILE" class="export-btn" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/metropolis/Metropolis-Medium.otf?fileID=12800000&amp;guid=9213b0212977c9942985d2e0ec605424&amp;type=3#Metropolis-Medium&quot;);" />
+            
+        </ui:VisualElement>
+
+        <ui:Button name="CloseProfileBtn" class="close-btn-circle">
+            <ui:Label text="✕" class="close-text" />
+        </ui:Button>
+    </ui:VisualElement>
 </ui:UXML>
