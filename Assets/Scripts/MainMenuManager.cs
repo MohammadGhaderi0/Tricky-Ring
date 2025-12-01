@@ -9,18 +9,15 @@ public class MainMenuManager : MonoBehaviour
     public UIDocument uiDocument;
     public string gameSceneName = "Game";
 
-    // UI Elements - Settings
+    // UI Elements
     private VisualElement _settingsOverlay;
-
-    // UI Elements - Leaderboard
     private VisualElement _leaderboardOverlay;
     private ListView _leaderboardList;
     private Button _tabDaily, _tabWeekly, _tabAllTime;
-
-    // UI Elements - Profile
     private VisualElement _profileOverlay;
     private Label _profileBestScoreLabel;
     private Label _profileTotalGamesLabel;
+    private VisualElement _shopOverlay;
 
     // Data Structure for Leaderboard
     public struct LeaderboardEntry
@@ -35,7 +32,6 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Audio Settings")] [SerializeField]
     AudioSource audioSource;
-
     [SerializeField] private AudioClip proceedSound;
     [SerializeField] private AudioClip cancelSound;
 
@@ -176,6 +172,29 @@ public class MainMenuManager : MonoBehaviour
 
         // Initialize the ListView
         if (_leaderboardList != null) ConfigureListView();
+        
+        // --- 4. SHOP LOGIC ---
+        _shopOverlay = root.Q<VisualElement>("ShopOverlay");
+        var shopBtn = root.Q<Button>("ShopBtn");
+        var closeShopBtn = root.Q<Button>("CloseShopBtn");
+
+        if (shopBtn != null)
+        {
+            shopBtn.clicked += () =>
+            {
+                PlaySound(proceedSound);
+                _shopOverlay.style.display = DisplayStyle.Flex;
+            };
+        }
+
+        if (closeShopBtn != null)
+        {
+            closeShopBtn.clicked += () =>
+            {
+                PlaySound(cancelSound);
+                _shopOverlay.style.display = DisplayStyle.None;
+            };
+        }
     }
 
     private void PlaySound(AudioClip clip)

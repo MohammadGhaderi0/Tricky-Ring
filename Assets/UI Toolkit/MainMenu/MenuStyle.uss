@@ -396,3 +396,40 @@
     background-color: rgb(200, 200, 200);
     scale: 0.98;
 }
+
+
+/* ===========================
+   SHOP SPECIFIC
+   =========================== */
+
+.shop-window {
+    width: 80%;
+    max-width: 600px;
+    height: 500px;
+    background-color: rgb(43, 43, 61);
+    border-radius: 40px;
+    border-width: 4px;
+    border-color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.coming-soon-text {
+    font-size: 70px;
+    color: rgba(255, 255, 255, 0.5); /* Dimmed text */
+    -unity-font-style: bold;
+    margin-top: 30px;
+    -unity-text-align: middle-center;
+}
+
+.icon-container-large {
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
+    border-width: 4px;
+    border-color: rgba(255, 255, 255, 0.5);
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5; /* Makes the icon look inactive */
+}

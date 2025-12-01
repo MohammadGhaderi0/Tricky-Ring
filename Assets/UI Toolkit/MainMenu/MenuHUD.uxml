@@ -96,4 +96,16 @@
             <ui:Label text="✕" class="close-text" />
         </ui:Button>
     </ui:VisualElement>
+    <ui:VisualElement name="ShopOverlay" class="settings-overlay" style="display: none;">
+        <ui:VisualElement name="ShopWindow" class="shop-window">
+            <ui:VisualElement class="icon-container-large">
+                <ui:VisualElement style="background-image: url(&quot;project://database/Assets/UI/kenney_game-icons/PNG/White/2x/shoppingCart.png?fileID=2800000&amp;guid=1c4d1138ae42c7d4d8e684965654588e&amp;type=3#shoppingCart&quot;); width: 150px; height: 150px; -unity-background-scale-mode: scale-to-fit;" />
+            </ui:VisualElement>
+            <ui:Label text="COMING SOON" class="coming-soon-text" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Humanist521LightBT.ttf?fileID=12800000&amp;guid=68bbb28b264221142b18359522007732&amp;type=3#Humanist521LightBT&quot;);" />
+        </ui:VisualElement>
+
+        <ui:Button name="CloseShopBtn" class="close-btn-circle">
+            <ui:Label text="✕" class="close-text" />
+        </ui:Button>
+    </ui:VisualElement>
 </ui:UXML>
