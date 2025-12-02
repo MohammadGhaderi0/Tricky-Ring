@@ -10,6 +10,11 @@
 
 The player controls a rotating orb that must switch between an inner and outer orbital ring to dodge obstacles and collect points. As the player progresses, the rotation speed increases, testing reflexes and timing.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/05c519ef-b989-4966-9024-36747aea5bc8" width="250" />
+  <img src="https://github.com/user-attachments/assets/e9910ee3-9fdc-42c6-b6b2-8a63410b595e" width="250" />
+</p>
+
 ## 🛠 Technical Implementation
 
 ### 1. UI Toolkit (Runtime UI)
